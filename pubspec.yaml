@@ -14,15 +14,38 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_svg: ^1.1.5
   intl: ^0.17.0
+  jiffy: ^5.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  very_good_analysis: ^3.0.2
+  very_good_analysis: ^3.1.0
+  widgetbook: ^2.4.1
 
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/images/
+    - assets/icons/
+  fonts:
+    - family: TimesNewerRoman
+      fonts:
+        - asset: assets/fonts/TimesNewerRoman-Regular.otf
+        - asset: assets/fonts/TimesNewerRoman-Italic.otf
+          style: italic
+        - asset: assets/fonts/TimesNewerRoman-Bold.otf
+          weight: 700
+    - family: SpaceGrotesk
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
+        - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
+          weight: 600
+
+flutter_gen:
+  integrations:
+    flutter_svg: true

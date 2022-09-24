@@ -8,6 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hpm_portfolio/l10n/l10n.dart';
+import 'package:hpm_portfolio/shared/extensions/extensions.dart';
+import 'package:hpm_portfolio/shared/shared.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -15,20 +17,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
+      theme: AppTheme.getThemeData(context),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const Scaffold(
+      home: Scaffold(
         body: Center(
-          child: Text('HPM Portfolio'),
+          child: Text(
+            'HPM Portfolio',
+            style: context.textTheme.displayLarge,
+          ),
         ),
       ),
     );
