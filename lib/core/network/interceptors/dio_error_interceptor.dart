@@ -60,21 +60,21 @@ class ResponseException extends DioError {
     super.response,
   });
 
-  @override
-  String toString() {
-    final data = response?.data;
-
-    if (data != null && data is Map<String, dynamic>) {
-      try {
-        final res = BaseResponse.fromJson(data, (json) => null);
-        return res.error?.message ?? 'Có lỗi xảy ra';
-      } on Exception {
-        return 'Có lỗi xảy ra';
-      }
-    }
-
-    return 'Có lỗi xảy ra';
-  }
+  // @override
+  // String toString() {
+  //   final data = response?.data;
+  //
+  //   if (data != null && data is Map<String, dynamic>) {
+  //     try {
+  //       final res = BaseResponse.fromJson(data, (json) => null);
+  //       return res.error?.message ?? 'Có lỗi xảy ra';
+  //     } on Exception {
+  //       return 'Có lỗi xảy ra';
+  //     }
+  //   }
+  //
+  //   return 'Có lỗi xảy ra';
+  // }
 }
 
 /// {@template interceptor}
@@ -84,10 +84,10 @@ class ServiceUnavailableException extends DioError {
   /// {@macro ServiceUnavailableException}
   ServiceUnavailableException({required super.requestOptions});
 
-  @override
-  String toString() {
-    return 'Dịch vụ hiện đang bị gián đoạn';
-  }
+  // @override
+  // String toString() {
+  //   return 'Dịch vụ hiện đang bị gián đoạn';
+  // }
 }
 
 /// {@template interceptor}
@@ -100,10 +100,10 @@ class UnauthorizedException extends DioError {
     super.response,
   });
 
-  @override
-  String toString() {
-    return 'Thông tin tài khoản hoặc mật khẩu không đúng';
-  }
+  // @override
+  // String toString() {
+  //   return 'Thông tin tài khoản hoặc mật khẩu không đúng';
+  // }
 }
 
 /// {@template interceptor}
@@ -116,10 +116,10 @@ class ForbiddenException extends DioError {
     super.response,
   });
 
-  @override
-  String toString() {
-    return 'Không có quyền truy cập';
-  }
+  // @override
+  // String toString() {
+  //   return 'Không có quyền truy cập';
+  // }
 }
 
 /// {@template interceptor}
@@ -129,10 +129,10 @@ class BadNetworkException extends DioError {
   /// {@macro BadNetworkException}
   BadNetworkException(RequestOptions r) : super(requestOptions: r);
 
-  @override
-  String toString() {
-    return 'Không có kết nối, vui lòng thử lại';
-  }
+  // @override
+  // String toString() {
+  //   return 'Không có kết nối, vui lòng thử lại';
+  // }
 }
 
 /// {@template interceptor}
@@ -142,8 +142,8 @@ class TimeoutException extends DioError {
   /// {@macro TimeoutException}
   TimeoutException(RequestOptions r) : super(requestOptions: r);
 
-  @override
-  String toString() {
-    return 'Kết nối bị gián đoạn, vui lòng thử lại';
-  }
+  // @override
+  // String toString() {
+  //   return 'Kết nối bị gián đoạn, vui lòng thử lại';
+  // }
 }
