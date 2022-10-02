@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:hpm_portfolio/shared/colors/colors.dart';
-import 'package:hpm_portfolio/shared/extensions/extensions.dart';
-import 'package:hpm_portfolio/shared/layout/layout.dart';
 import 'package:hpm_portfolio/shared/typography/typography.dart';
 
 const _smallTextScaleFactor = 0.80;
-const _largeTextScaleFactor = 1.20;
+const _largeTextScaleFactor = 1.00;
 
 /// Namespace for the App [ThemeData].
 class AppTheme {
@@ -42,18 +40,10 @@ class AppTheme {
     return standard.copyWith(textTheme: _largeTextTheme);
   }
 
-  static ThemeData getThemeData(BuildContext context) {
-    if (context.width <= AppBreakpoints.small) {
-      return AppTheme.small;
-    } else if (context.width <= AppBreakpoints.medium) {
-      return AppTheme.medium;
-    } else {
-      return AppTheme.large;
-    }
-  }
-
   static TextTheme get _textTheme {
     return TextTheme(
+      displayLarge: AppTextStyle.displayLarge,
+      displaySmall: AppTextStyle.displaySmall,
       titleLarge: AppTextStyle.titleLarge,
       titleMedium: AppTextStyle.titleMedium,
       titleSmall: AppTextStyle.titleSmall,
@@ -64,6 +54,12 @@ class AppTheme {
 
   static TextTheme get _smallTextTheme {
     return TextTheme(
+      displayLarge: AppTextStyle.displayLarge.copyWith(
+        fontSize: _textTheme.displayLarge!.fontSize! * _smallTextScaleFactor,
+      ),
+      displaySmall: AppTextStyle.displaySmall.copyWith(
+        fontSize: _textTheme.displaySmall!.fontSize! * _smallTextScaleFactor,
+      ),
       titleLarge: AppTextStyle.titleLarge.copyWith(
         fontSize: _textTheme.titleLarge!.fontSize! * _smallTextScaleFactor,
       ),
@@ -84,6 +80,12 @@ class AppTheme {
 
   static TextTheme get _largeTextTheme {
     return TextTheme(
+      displayLarge: AppTextStyle.displayLarge.copyWith(
+        fontSize: _textTheme.displayLarge!.fontSize! * _largeTextScaleFactor,
+      ),
+      displaySmall: AppTextStyle.displaySmall.copyWith(
+        fontSize: _textTheme.displaySmall!.fontSize! * _largeTextScaleFactor,
+      ),
       titleLarge: AppTextStyle.titleLarge.copyWith(
         fontSize: _textTheme.titleLarge!.fontSize! * _largeTextScaleFactor,
       ),

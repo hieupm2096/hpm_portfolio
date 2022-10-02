@@ -7,29 +7,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hpm_portfolio/features/home/view/home_page.dart';
 import 'package:hpm_portfolio/l10n/l10n.dart';
-import 'package:hpm_portfolio/shared/extensions/extensions.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
+import 'package:layout/layout.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.getThemeData(context),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            'HPM Portfolio',
-            style: context.textTheme.displayLarge,
-          ),
-        ),
+    return Layout(
+      child: MaterialApp(
+        theme: AppTheme.standard,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const HomePage(),
       ),
     );
   }

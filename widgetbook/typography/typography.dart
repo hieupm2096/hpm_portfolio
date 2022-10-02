@@ -8,6 +8,30 @@ class WidgetbookTypography {
       name: 'Typography',
       useCases: [
         WidgetbookUseCase(
+          name: 'Display 2 - Italic',
+          builder: (context) {
+            return Text(
+              context.knobs.text(
+                label: 'text',
+                initialValue: 'Hi. I am Hieu',
+              ),
+              style: context.textTheme.displayLarge,
+            );
+          },
+        ),
+        WidgetbookUseCase(
+          name: 'Display 2 Alt - Italic',
+          builder: (context) {
+            return Text(
+              context.knobs.text(
+                label: 'text',
+                initialValue: 'Hi. I am Hieu',
+              ),
+              style: context.textTheme.displaySmall,
+            );
+          },
+        ),
+        WidgetbookUseCase(
           name: 'Display 1 - Bold',
           builder: (context) {
             return Text(
@@ -16,18 +40,6 @@ class WidgetbookTypography {
                 initialValue: 'What makes a great design outcome?',
               ),
               style: context.textTheme.titleLarge,
-            );
-          },
-        ),
-        WidgetbookUseCase(
-          name: 'Title - Regular',
-          builder: (context) {
-            return Text(
-              context.knobs.text(
-                label: 'text',
-                initialValue: 'Work',
-              ),
-              style: context.textTheme.titleMedium,
             );
           },
         ),

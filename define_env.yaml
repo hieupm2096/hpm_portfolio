@@ -1,0 +1,6 @@
+define_env:
+  file_path: lib/gen/
+  class: Env
+  fields:
+    HOST:
+      type: String

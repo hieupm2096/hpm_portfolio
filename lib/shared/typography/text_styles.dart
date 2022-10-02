@@ -12,6 +12,20 @@ class AppTextStyle {
     fontWeight: AppFontWeight.regular,
   );
 
+  /// Display 2 - Italic / Title Large
+  static TextStyle get displayLarge => _baseTextStyle.copyWith(
+    fontSize: 57,
+    fontStyle: FontStyle.italic,
+    height: 1.3,
+  );
+
+  /// Display 2 - Italic / Title Large
+  static TextStyle get displaySmall => _baseTextStyle.copyWith(
+    fontSize: 36,
+    fontStyle: FontStyle.italic,
+    height: 1.3,
+  );
+
   /// Display 1 - Bold / Title Large
   static TextStyle get titleLarge => _baseTextStyle.copyWith(
         fontSize: 22,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
-import 'package:hpm_portfolio/shared/shared.dart';
+import 'package:hpm_portfolio/shared/insets/inset.dart';
 
 class ProjectList extends StatelessWidget {
   const ProjectList({
     super.key,
-    required this.title,
   });
-
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -39,29 +37,16 @@ class ProjectList extends StatelessWidget {
       ),
     ];
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.text),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Header(title: title),
-          const Divider(height: 1, color: AppColors.text),
-          ListView.separated(
-            itemCount: projects.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return projects[index];
-            },
-            separatorBuilder: (context, index) {
-              return Assets.images.intersectLine.svg();
-            },
-
-          ),
-        ],
-      ),
+    return ListView.separated(
+      itemCount: projects.length,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return Inset(child: projects[index]);
+      },
+      separatorBuilder: (context, index) {
+        return Assets.images.intersectLine.svg();
+      },
     );
   }
 }

@@ -36,14 +36,14 @@ class ErrorMessage {
     // this.details,
   });
 
+  factory ErrorMessage.fromJson(Map<String, dynamic> json) =>
+      _$ErrorMessageFromJson(json);
+
   final num? status;
   final String? name;
   final String? message;
+// final dynamic details;
 
-  // final dynamic details;
-
-  factory ErrorMessage.fromJson(Map<String, dynamic> json) =>
-      _$ErrorMessageFromJson(json);
 }
 
 /// pagination : {"page":0,"pageSize":25,"pageCount":1,"total":0}
@@ -71,6 +71,8 @@ class Pagination {
 
   factory Pagination.fromJson(Map<String, dynamic> json) =>
       _$PaginationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaginationToJson(this);
 
   final int? page;
   final int? pageSize;

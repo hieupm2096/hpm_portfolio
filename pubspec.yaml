@@ -15,18 +15,26 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_markdown: ^0.6.12
+  flutter_pretty_dio_logger: ^2.0.3
   flutter_svg: ^1.1.5
+  freezed_annotation: ^2.1.0
+  get_it: ^7.2.0
   intl: ^0.17.0
   jiffy: ^5.0.0
   json_annotation: ^4.7.0
+  layout: ^1.0.3
+  retrofit: ^3.0.1+1
 
 dev_dependencies:
-  build_runner:
   bloc_test: ^9.1.0
+  build_runner:
   flutter_test:
     sdk: flutter
+  freezed: ^2.1.0+1
   json_serializable: ^6.4.1
   mocktail: ^0.3.0
+  retrofit_generator: ^4.1.0+1
   very_good_analysis: ^3.1.0
   widgetbook: ^2.4.1
 

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hpm_portfolio/features/home/widgets/intersect_category.dart';
+import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
-import 'package:hpm_portfolio/shared/shared.dart';
+import 'package:hpm_portfolio/shared/insets/inset.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:layout/layout.dart';
 
 class ArticleList extends StatelessWidget {
   const ArticleList({
     super.key,
-    required this.title,
   });
-
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -73,28 +73,42 @@ class ArticleList extends StatelessWidget {
       ),
     ];
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.text),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Header(title: title),
-          const Divider(height: 1, color: AppColors.text),
-          ListView.separated(
-            itemCount: articles.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return articles[index];
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 24);
-            },
-          ),
-        ],
-      ),
+    final maps = <String, List<Article>>{};
+    for (final e in articles) {
+      final publishedDate = e.publishedDate;
+      if (publishedDate != null) {
+        final month = Jiffy(publishedDate).format('MMMM');
+        if (maps.containsKey(month)) {
+          maps[month]?.add(e);
+        } else {
+          maps[month] = [e];
+        }
+      }
+    }
+
+    final list = maps.entries
+        .map(
+          (e) => [
+            IntersectCategory(title: e.key),
+            ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: e.value.length,
+              itemBuilder: (context, index) => HorizontalInset(
+                child: e.value[index],
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 24),
+            ),
+            const SizedBox(height: 24),
+            Assets.images.intersectLine.svg(),
+          ],
+        )
+        .expand((element) => element)
+        .toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: list,
     );
   }
 }

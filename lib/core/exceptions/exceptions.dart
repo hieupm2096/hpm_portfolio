@@ -1,0 +1,2 @@
+
+class CommonNetworkException implements Exception {}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hpm_portfolio/shared/shared.dart';
-import 'package:hpm_portfolio/shared/widgets/article.dart';
+import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 class WidgetbookWidgets {
@@ -35,14 +34,34 @@ class WidgetbookWidgets {
           },
         ),
         WidgetbookUseCase(
-          name: 'Header',
+          name: 'Category Header',
           builder: (context) {
-            return Header(
+            return CategoryHeader(
               title: context.knobs.text(
                 label: 'text',
                 initialValue: 'Work',
               ),
             );
+          },
+        ),
+        WidgetbookUseCase(
+          name: 'Heading',
+          builder: (context) {
+            return Heading(
+              title: context.knobs.text(
+                label: 'text',
+                initialValue: 'Hi. I am Alexis,'
+                    '\nA french designer who can code.'
+                    '\nI currently design productive tools at Veepee ↗'
+                    '\nwhile always looking for interesting freelance projects.',
+              ),
+            );
+          },
+        ),
+        WidgetbookUseCase(
+          name: 'About',
+          builder: (context) {
+            return const About();
           },
         ),
         WidgetbookUseCase(
@@ -71,11 +90,9 @@ class WidgetbookWidgets {
         WidgetbookUseCase(
           name: 'Project List',
           builder: (context) {
-            return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: ProjectList(
-                title: context.knobs.text(label: 'title', initialValue: 'Work'),
-              ),
+            return const SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: ProjectList(),
             );
           },
         ),
@@ -108,14 +125,9 @@ class WidgetbookWidgets {
         WidgetbookUseCase(
           name: 'Article List',
           builder: (context) {
-            return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: ArticleList(
-                title: context.knobs.text(
-                  label: 'title',
-                  initialValue: 'Good Readings',
-                ),
-              ),
+            return const SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: ArticleList(),
             );
           },
         ),

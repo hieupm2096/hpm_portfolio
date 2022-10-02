@@ -42,6 +42,8 @@ class ArticleNoPic extends StatelessWidget {
         Text(
           content,
           style: context.textTheme.bodyLarge,
+          maxLines: 5,
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 12),
         if (link != null)
