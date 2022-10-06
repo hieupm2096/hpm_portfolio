@@ -33,7 +33,9 @@ class ArticleNoPic extends StatelessWidget {
         Text(
           '$label'
           ' — '
-          '${Jiffy(publishedDate ?? DateTime.now()).format(DateFormat.MMMMddyyyy)}',
+          '${Jiffy(
+            publishedDate ?? DateTime.now(),
+          ).format(DateFormat.MMMMddyyyy)}',
           style: context.textTheme.labelMedium!.copyWith(
             color: AppColors.textAlt,
           ),

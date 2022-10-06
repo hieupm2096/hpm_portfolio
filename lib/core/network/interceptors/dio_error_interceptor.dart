@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hpm_portfolio/core/models/models.dart';
 
 /// {@template dio_error_interceptor}
 /// Dio Error Interceptor

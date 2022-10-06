@@ -7,10 +7,10 @@ abstract class AppColors {
 
   /// Text alternative
   static const Color textAlt = Color(0xFF7E7B63);
-  
+
   /// Image overlay
   static const Color imageOverlay = Color(0xFFDBDAD1);
-  
+
   /// Background
   static const Color background = Color(0xFFFAF9F5);
 

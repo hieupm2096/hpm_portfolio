@@ -26,7 +26,7 @@ class Footer extends StatelessWidget {
         ),
       ),
       child: Row(
-        children: [
+        children: const [
           Expanded(child: FooterText()),
         ],
       ),

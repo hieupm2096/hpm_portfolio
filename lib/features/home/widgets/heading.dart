@@ -13,7 +13,8 @@ class Heading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.layout.value<double>(xs: 16, sm: 16, md: 32, lg: 12);
+    final padding =
+        context.layout.value<double>(xs: 16, sm: 16, md: 32, lg: 12);
     final gutter = context.layout.value<double>(xs: 24, sm: 36, md: 56, lg: 64);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: padding),

@@ -14,17 +14,17 @@ class AppTextStyle {
 
   /// Display 2 - Italic / Title Large
   static TextStyle get displayLarge => _baseTextStyle.copyWith(
-    fontSize: 57,
-    fontStyle: FontStyle.italic,
-    height: 1.3,
-  );
+        fontSize: 57,
+        fontStyle: FontStyle.italic,
+        height: 1.3,
+      );
 
   /// Display 2 - Italic / Title Large
   static TextStyle get displaySmall => _baseTextStyle.copyWith(
-    fontSize: 36,
-    fontStyle: FontStyle.italic,
-    height: 1.3,
-  );
+        fontSize: 36,
+        fontStyle: FontStyle.italic,
+        height: 1.3,
+      );
 
   /// Display 1 - Bold / Title Large
   static TextStyle get titleLarge => _baseTextStyle.copyWith(
@@ -36,21 +36,21 @@ class AppTextStyle {
 
   /// Title - Regular / Title Medium
   static TextStyle get titleMedium => _baseTextStyle.copyWith(
-    fontFamily: FontFamily.spaceGrotesk,
-    fontSize: 20,
-    fontWeight: AppFontWeight.semiBold,
-    height: 1.3,
-    letterSpacing: 1.02,
-  );
+        fontFamily: FontFamily.spaceGrotesk,
+        fontSize: 20,
+        fontWeight: AppFontWeight.semiBold,
+        height: 1.3,
+        letterSpacing: 1.02,
+      );
 
   /// Title - Small / Title Small
   static TextStyle get titleSmall => _baseTextStyle.copyWith(
-    fontFamily: FontFamily.spaceGrotesk,
-    fontSize: 15,
-    fontWeight: AppFontWeight.semiBold,
-    height: 1.3,
-    letterSpacing: 1.15,
-  );
+        fontFamily: FontFamily.spaceGrotesk,
+        fontSize: 15,
+        fontWeight: AppFontWeight.semiBold,
+        height: 1.3,
+        letterSpacing: 1.15,
+      );
 
   /// Default - Regular / Body Large
   static TextStyle get bodyLarge => _baseTextStyle.copyWith(
@@ -61,9 +61,9 @@ class AppTextStyle {
 
   /// Caption - Regular / Label Medium
   static TextStyle get labelMedium => _baseTextStyle.copyWith(
-    fontFamily: FontFamily.spaceGrotesk,
-    fontSize: 12,
-    fontWeight: AppFontWeight.regular,
-    height: 1.6,
-  );
+        fontFamily: FontFamily.spaceGrotesk,
+        fontSize: 12,
+        fontWeight: AppFontWeight.regular,
+        height: 1.6,
+      );
 }

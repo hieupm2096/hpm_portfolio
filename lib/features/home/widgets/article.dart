@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
-import 'package:layout/layout.dart';
 
 class Article extends StatelessWidget {
   const Article({
@@ -33,8 +32,8 @@ class Article extends StatelessWidget {
             color: AppColors.background,
             border: Border.all(color: AppColors.text),
           ),
-          child: thumbnail ??
-              Assets.images.articleImage1.image(fit: BoxFit.cover),
+          child:
+              thumbnail ?? Assets.images.articleImage1.image(fit: BoxFit.cover),
         ),
         const SizedBox(width: 16),
         Expanded(
