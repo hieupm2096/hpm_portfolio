@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
+import 'package:layout/layout.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 import 'typography/typography.dart';
@@ -11,6 +12,12 @@ class WidgetbookHotReload extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook(
+      appBuilder: (context, child) => Layout(
+        child: materialAppBuilder(
+          context,
+          child,
+        ),
+      ),
       scaffoldBuilder: (context, frame, child) {
         return Scaffold(
           backgroundColor: AppColors.background,

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'article.dart';
+part of 'article_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Article _$ArticleFromJson(Map<String, dynamic> json) => Article(
+ArticleModel _$ArticleModelFromJson(Map<String, dynamic> json) => ArticleModel(
       id: json['id'] as num?,
       title: json['title'] as String?,
       description: json['description'] as String?,
@@ -20,10 +20,11 @@ Article _$ArticleFromJson(Map<String, dynamic> json) => Article(
           : ImageModel.fromJson(json['cover'] as Map<String, dynamic>),
       category: json['category'] == null
           ? null
-          : Category.fromJson(json['category'] as Map<String, dynamic>),
+          : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ArticleToJson(Article instance) => <String, dynamic>{
+Map<String, dynamic> _$ArticleModelToJson(ArticleModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,

@@ -36,4 +36,3 @@ class HorizontalInset extends StatelessWidget {
     );
   }
 }
-

@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch widgetbook",
+      "type": "dart",
+      "request": "launch",
+      "program": "widgetbook/main.dart"
+    },
+    {
       "name": "Launch development",
       "request": "launch",
       "type": "dart",

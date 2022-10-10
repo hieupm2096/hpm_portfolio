@@ -21,9 +21,8 @@ class WidgetbookWidgets {
               ),
               content: context.knobs.text(
                 label: 'content',
-                initialValue:
-                    'As designers and design leaders, we want our efforts '
-                    'and the efforts of our teams to result in '
+                initialValue: 'As designers and design leaders, we want our '
+                    'efforts and the efforts of our teams to result in '
                     'something truly great…',
               ),
               link: context.knobs.text(
@@ -53,7 +52,8 @@ class WidgetbookWidgets {
                 initialValue: 'Hi. I am Alexis,'
                     '\nA french designer who can code.'
                     '\nI currently design productive tools at Veepee ↗'
-                    '\nwhile always looking for interesting freelance projects.',
+                    '\nwhile always looking for interesting freelance '
+                    'projects.',
               ),
             );
           },
@@ -62,6 +62,12 @@ class WidgetbookWidgets {
           name: 'About',
           builder: (context) {
             return const About();
+          },
+        ),
+        WidgetbookUseCase(
+          name: 'About Loading',
+          builder: (context) {
+            return const AboutShimmer();
           },
         ),
         WidgetbookUseCase(
@@ -78,11 +84,10 @@ class WidgetbookWidgets {
               ),
               content: context.knobs.text(
                 label: 'content',
-                initialValue:
-                    'The Digital Factory is in charge of the digitalization of'
-                    ' products sold online by Veepee. We provide shooting,'
-                    ' storage, data writing, media management and staffing'
-                    ' solutions for our collaborators.',
+                initialValue: 'The Digital Factory is in charge of the '
+                    'digitalization of products sold online by Veepee. We '
+                    'provide shooting, storage, data writing, media management '
+                    'and staffing solutions for our collaborators.',
               ),
             );
           },
@@ -110,9 +115,8 @@ class WidgetbookWidgets {
               ),
               content: context.knobs.text(
                 label: 'content',
-                initialValue:
-                    'As designers and design leaders, we want our efforts '
-                    'and the efforts of our teams to result in '
+                initialValue: 'As designers and design leaders, we want our '
+                    'efforts and the efforts of our teams to result in '
                     'something truly great…',
               ),
               link: context.knobs.text(

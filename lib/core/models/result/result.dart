@@ -29,7 +29,7 @@ class Result<Success, Failure> with _$Result<Success, Failure> {
   ) {
     return when(
       success: (success) => mapper(success),
-      failure: (failure) => Result.failure(failure),
+      failure: Result.failure,
     );
   }
 

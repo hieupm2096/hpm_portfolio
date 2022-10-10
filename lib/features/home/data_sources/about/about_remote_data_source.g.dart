@@ -16,20 +16,20 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<BaseResponse<About>> getAbout() async {
+  Future<BaseResponse<AboutModel>> getAbout() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<About>>(
+        _setStreamType<BaseResponse<AboutModel>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/api/about',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse<About>.fromJson(
+    final value = BaseResponse<AboutModel>.fromJson(
       _result.data!,
-      (json) => About.fromJson(json as Map<String, dynamic>),
+      (json) => AboutModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

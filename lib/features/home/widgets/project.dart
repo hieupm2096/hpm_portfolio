@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
-import 'package:layout/layout.dart';
 
 class Project extends StatelessWidget {
   const Project({

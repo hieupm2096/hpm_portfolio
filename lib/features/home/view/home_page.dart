@@ -1,8 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hpm_portfolio/di.dart';
+import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
+import 'package:hpm_portfolio/features/home/repos/about_repository.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
-import 'package:hpm_portfolio/shared/widgets/footer.dart';
 import 'package:layout/layout.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,44 +13,72 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding =
-        context.layout.value<double>(xs: 16, sm: 32, md: 32, lg: 64);
-
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(padding),
-          child: Column(
-            children: [
-              AdaptiveBuilder(
-                xs: (context) => const HomeSmall(),
-                md: (context) => const HomeMedium(),
-                lg: (context) => const HomeLarge(),
-              ),
-              const Footer(),
-            ],
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AboutCubit(
+              aboutRepository: getIt<IAboutRepository>(),
+            ),
           ),
+        ],
+        child: const _HomePage(),
+      ),
+    );
+  }
+}
+
+class _HomePage extends StatefulWidget {
+  const _HomePage();
+
+  @override
+  State<_HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<_HomePage> {
+  @override
+  void initState() {
+    context.read<AboutCubit>().getAbout();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final padding = context.layout.value<double>(
+      xs: 16,
+      sm: 32,
+      md: 32,
+      lg: 64,
+    );
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: Column(
+          children: [
+            AdaptiveBuilder(
+              xs: (context) => const _HomeSmall(),
+              md: (context) => const _HomeMedium(),
+              lg: (context) => const _HomeLarge(),
+            ),
+            const Footer(),
+          ],
         ),
       ),
     );
   }
 }
 
-class HomeSmall extends StatelessWidget {
-  const HomeSmall({super.key});
+class _HomeSmall extends StatelessWidget {
+  const _HomeSmall();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Heading(
-          title: 'Hi. I am Alexis,'
-              '\nA french designer who can code.'
-              '\nI currently design productive tools at Veepee ↗'
-              '\nwhile always looking for interesting freelance projects.',
-        ),
+        const HeadingBlocWrapper(),
         Table(
           border: TableBorder.all(color: AppColors.text),
           children: const [
@@ -56,7 +87,7 @@ class HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'About')),
               ],
             ),
-            TableRow(children: [TableCell(child: About())]),
+            TableRow(children: [TableCell(child: AboutBlocWrapper())]),
             TableRow(
               children: [
                 TableCell(child: CategoryHeader(title: 'Work')),
@@ -76,20 +107,15 @@ class HomeSmall extends StatelessWidget {
   }
 }
 
-class HomeMedium extends StatelessWidget {
-  const HomeMedium({super.key});
+class _HomeMedium extends StatelessWidget {
+  const _HomeMedium();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Heading(
-          title: 'Hi. I am Alexis,'
-              '\nA french designer who can code.'
-              '\nI currently design productive tools at Veepee ↗'
-              '\nwhile always looking for interesting freelance projects.',
-        ),
+        const HeadingBlocWrapper(),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -103,7 +129,7 @@ class HomeMedium extends StatelessWidget {
               vertical: BorderSide(color: AppColors.text),
             ),
           ),
-          child: About(),
+          child: AboutBlocWrapper(),
         ),
         Table(
           border: TableBorder.all(color: AppColors.text),
@@ -123,7 +149,7 @@ class HomeMedium extends StatelessWidget {
             TableRow(
               children: [
                 TableCell(child: ProjectList()),
-                TableCell(child: ArticleList())
+                TableCell(child: ArticleList()),
               ],
             ),
           ],
@@ -133,20 +159,15 @@ class HomeMedium extends StatelessWidget {
   }
 }
 
-class HomeLarge extends StatelessWidget {
-  const HomeLarge({super.key});
+class _HomeLarge extends StatelessWidget {
+  const _HomeLarge();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Heading(
-          title: 'Hi. I am Alexis,'
-              '\nA french designer who can code.'
-              '\nI currently design productive tools at Veepee ↗'
-              '\nwhile always looking for interesting freelance projects.',
-        ),
+        const HeadingBlocWrapper(),
         Table(
           border: TableBorder.all(color: AppColors.text),
           columnWidths: const {
@@ -164,7 +185,7 @@ class HomeLarge extends StatelessWidget {
             ),
             TableRow(
               children: [
-                TableCell(child: About()),
+                TableCell(child: AboutBlocWrapper()),
                 TableCell(child: ProjectList()),
                 TableCell(child: ArticleList()),
               ],

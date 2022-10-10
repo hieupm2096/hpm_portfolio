@@ -1,4 +1,5 @@
 export 'about.dart';
+export 'about_shimmer.dart';
 export 'article.dart';
 export 'article_list.dart';
 export 'article_no_pic.dart';

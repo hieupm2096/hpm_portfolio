@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
-
 import 'package:hpm_portfolio/core/network/interceptors/dio_error_interceptor.dart';
 
 /// {@template DioInitializer}
@@ -16,16 +14,9 @@ class DioInitializer {
   /// [Dio] instance
   static Dio get dio {
     if (kDebugMode) {
-      _dio.interceptors.add(
-        PrettyDioLogger(
-          requestHeader: true,
-          queryParameters: true,
-          requestBody: true,
-          responseHeader: true,
-          showCUrl: true,
-          canShowLog: kDebugMode,
-        ),
-      );
+      // _dio.interceptors.add(
+
+      // );
     }
 
     _dio.interceptors.add(DioErrorInterceptor());

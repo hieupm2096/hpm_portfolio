@@ -4,7 +4,7 @@ import 'package:hpm_portfolio/features/home/data_sources/data_sources.dart';
 import 'package:hpm_portfolio/features/home/models/models.dart';
 
 abstract class IAboutRepository {
-  Future<Result<About, Exception>> getAbout();
+  Future<Result<AboutModel, Exception>> getAbout();
 }
 
 class AboutRepository implements IAboutRepository {
@@ -15,7 +15,7 @@ class AboutRepository implements IAboutRepository {
   final AboutRemoteDataSource _aboutRemoteDataSource;
 
   @override
-  Future<Result<About, Exception>> getAbout() async {
+  Future<Result<AboutModel, Exception>> getAbout() async {
     try {
       final response = await _aboutRemoteDataSource.getAbout();
       final data = response.data;

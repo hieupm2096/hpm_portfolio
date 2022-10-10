@@ -4,9 +4,9 @@ import 'package:hpm_portfolio/features/home/data_sources/article/article_remote_
 import 'package:hpm_portfolio/features/home/models/models.dart';
 
 abstract class IArticleRepository {
-  Future<Result<List<Article>, Exception>> getWorks();
+  Future<Result<List<ArticleModel>, Exception>> getWorks();
 
-  Future<Result<List<Article>, Exception>> getArticles();
+  Future<Result<List<ArticleModel>, Exception>> getArticles();
 }
 
 class ArticleRepository implements IArticleRepository {
@@ -16,7 +16,7 @@ class ArticleRepository implements IArticleRepository {
   final ArticleRemoteDataSource _articleRemoteDataSource;
 
   @override
-  Future<Result<List<Article>, Exception>> getArticles() async {
+  Future<Result<List<ArticleModel>, Exception>> getArticles() async {
     try {
       final response = await _articleRemoteDataSource.getArticles(
         category: 'article',
@@ -33,7 +33,7 @@ class ArticleRepository implements IArticleRepository {
   }
 
   @override
-  Future<Result<List<Article>, Exception>> getWorks() async {
+  Future<Result<List<ArticleModel>, Exception>> getWorks() async {
     try {
       final response = await _articleRemoteDataSource.getArticles(
         category: 'work',

@@ -11,7 +11,7 @@ abstract class ArticleRemoteDataSource {
       _ArticleRemoteDataSource;
 
   @GET('/api/articles')
-  Future<BaseResponse<List<Article>>> getArticles({
+  Future<BaseResponse<List<ArticleModel>>> getArticles({
     @Query('populate[cover][fields]')
         String coverFields = 'name,url,width,height',
     @Query('populate[category][fields]') String categoryFields = 'name',

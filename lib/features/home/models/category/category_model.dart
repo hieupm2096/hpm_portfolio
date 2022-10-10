@@ -3,17 +3,17 @@ import 'package:json_annotation/json_annotation.dart';
 /// id : 1
 /// name : "work"
 
-part 'category.g.dart';
+part 'category_model.g.dart';
 
 @JsonSerializable()
-class Category {
-  Category({
+class CategoryModel {
+  CategoryModel({
     this.id,
     this.name,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+  factory CategoryModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoryModelFromJson(json);
 
   final num? id;
   final String? name;

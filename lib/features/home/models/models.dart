@@ -1,3 +1,3 @@
-export 'about/about.dart';
-export 'article/article.dart';
-export 'category/category.dart';
+export 'about/about_model.dart';
+export 'article/article_model.dart';
+export 'category/category_model.dart';

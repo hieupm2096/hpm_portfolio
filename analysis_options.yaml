@@ -5,7 +5,8 @@ linter:
     one_member_abstracts: false
 analyzer:
   exclude:
-    - "**/*.g.dart"
-    - "**/*.freezed.dart"
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - '**/*.gen.dart'
   errors:
     invalid_annotation_target: ignore

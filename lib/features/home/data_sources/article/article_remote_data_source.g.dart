@@ -16,7 +16,7 @@ class _ArticleRemoteDataSource implements ArticleRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<BaseResponse<List<Article>>> getArticles(
+  Future<BaseResponse<List<ArticleModel>>> getArticles(
       {coverFields = 'name,url,width,height',
       categoryFields = 'name',
       category,
@@ -34,15 +34,16 @@ class _ArticleRemoteDataSource implements ArticleRemoteDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<List<Article>>>(
+        _setStreamType<BaseResponse<List<ArticleModel>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/api/articles',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse<List<Article>>.fromJson(
+    final value = BaseResponse<List<ArticleModel>>.fromJson(
       _result.data!,
       (json) => (json as List<dynamic>)
-          .map<Article>((i) => Article.fromJson(i as Map<String, dynamic>))
+          .map<ArticleModel>(
+              (i) => ArticleModel.fromJson(i as Map<String, dynamic>))
           .toList(),
     );
     return value;
