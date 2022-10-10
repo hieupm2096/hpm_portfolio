@@ -5,7 +5,7 @@ import 'package:hpm_portfolio/features/home/data_sources/article/article_remote_
 void main() {
   test(
     'getArticles',
-        () async {
+    () async {
       final articleRemoteDataSource = ArticleRemoteDataSource(
         DioInitializer.dio,
         baseUrl: 'http://localhost:1337',

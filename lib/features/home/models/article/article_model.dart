@@ -6,7 +6,7 @@ part 'article_model.g.dart';
 
 /// id : 1
 /// title : "The internet's Own boy"
-/// description : "Follow the story of Aaron Swartz, the boy who could change 
+/// description : "Follow the story of Aaron Swartz, the boy who could change
 /// the world"
 /// slug : "the-internet-s-own-boy"
 /// createdAt : "2022-09-27T16:35:01.535Z"

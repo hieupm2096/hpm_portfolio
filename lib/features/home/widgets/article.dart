@@ -32,10 +32,8 @@ class Article extends StatelessWidget {
             color: AppColors.background,
             border: Border.all(color: AppColors.text),
           ),
-          child: thumbnail ??
-              Assets.images.articleImage1.image(
-                fit: BoxFit.cover,
-              ),
+          child:
+              thumbnail ?? Assets.images.articleImage1.image(fit: BoxFit.cover),
         ),
         const SizedBox(width: 16),
         Expanded(
