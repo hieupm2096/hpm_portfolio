@@ -20,7 +20,6 @@ class ArticleRepository implements IArticleRepository {
     try {
       final response = await _articleRemoteDataSource.getArticles(
         category: 'article',
-        pagination: Pagination(page: 1, pageSize: 100).toJson(),
       );
       final data = response.data;
       if (data == null) {
@@ -37,7 +36,6 @@ class ArticleRepository implements IArticleRepository {
     try {
       final response = await _articleRemoteDataSource.getArticles(
         category: 'work',
-        pagination: Pagination(page: 1, pageSize: 100).toJson(),
       );
       final data = response.data;
       if (data == null) {

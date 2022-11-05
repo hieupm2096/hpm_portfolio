@@ -2,6 +2,7 @@ export 'about.dart';
 export 'about_shimmer.dart';
 export 'article.dart';
 export 'article_list.dart';
+export 'article_list_shimmer.dart';
 export 'article_no_pic.dart';
 export 'category_header.dart';
 export 'heading.dart';

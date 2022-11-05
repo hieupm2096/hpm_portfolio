@@ -15,8 +15,10 @@ abstract class ArticleRemoteDataSource {
     @Query('populate[cover][fields]')
         String coverFields = 'name,url,width,height',
     @Query('populate[category][fields]') String categoryFields = 'name',
+    @Query('populate[author][fields]') String authorFields = 'name',
     @Query(r'populate[category][filters][name][$eq]') String? category,
     @Query('sort') String? sort = 'publishedAt:desc',
-    @Queries() Map<String, dynamic>? pagination,
+    @Query('pagination[page]') int page = 1,
+    @Query('pagination[pageSize]') int pageSize = 100,
   });
 }

@@ -21,6 +21,9 @@ ArticleModel _$ArticleModelFromJson(Map<String, dynamic> json) => ArticleModel(
       category: json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
+      author: json['author'] == null
+          ? null
+          : AuthorModel.fromJson(json['author'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ArticleModelToJson(ArticleModel instance) =>
@@ -35,4 +38,5 @@ Map<String, dynamic> _$ArticleModelToJson(ArticleModel instance) =>
       'note': instance.note,
       'cover': instance.cover,
       'category': instance.category,
+      'author': instance.author,
     };

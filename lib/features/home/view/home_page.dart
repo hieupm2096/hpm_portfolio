@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hpm_portfolio/di.dart';
 import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
+import 'package:hpm_portfolio/features/home/blocs/article/article_cubit.dart';
 import 'package:hpm_portfolio/features/home/repos/about_repository.dart';
+import 'package:hpm_portfolio/features/home/repos/article_repository.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 import 'package:layout/layout.dart';
@@ -20,6 +22,11 @@ class HomePage extends StatelessWidget {
           BlocProvider(
             create: (context) => AboutCubit(
               aboutRepository: getIt<IAboutRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => ArticleCubit(
+              articleRepository: getIt<IArticleRepository>(),
             ),
           ),
         ],
@@ -40,6 +47,7 @@ class _HomePageState extends State<_HomePage> {
   @override
   void initState() {
     context.read<AboutCubit>().getAbout();
+    context.read<ArticleCubit>().getArticles();
     super.initState();
   }
 
@@ -99,7 +107,7 @@ class _HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'Good readings')),
               ],
             ),
-            TableRow(children: [TableCell(child: ArticleList())]),
+            TableRow(children: [TableCell(child: ArticleListBlocWrapper())]),
           ],
         ),
       ],
@@ -149,7 +157,7 @@ class _HomeMedium extends StatelessWidget {
             TableRow(
               children: [
                 TableCell(child: ProjectList()),
-                TableCell(child: ArticleList()),
+                TableCell(child: ArticleListBlocWrapper()),
               ],
             ),
           ],
@@ -187,7 +195,7 @@ class _HomeLarge extends StatelessWidget {
               children: [
                 TableCell(child: AboutBlocWrapper()),
                 TableCell(child: ProjectList()),
-                TableCell(child: ArticleList()),
+                TableCell(child: ArticleListBlocWrapper()),
               ],
             ),
           ],

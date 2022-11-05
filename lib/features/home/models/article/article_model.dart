@@ -1,4 +1,5 @@
 import 'package:hpm_portfolio/core/models/models.dart';
+import 'package:hpm_portfolio/features/home/models/author/author_model.dart';
 import 'package:hpm_portfolio/features/home/models/category/category_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -29,6 +30,7 @@ class ArticleModel {
     this.note,
     this.cover,
     this.category,
+    this.author,
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>
@@ -51,4 +53,5 @@ class ArticleModel {
   final String? note;
   final ImageModel? cover;
   final CategoryModel? category;
+  final AuthorModel? author;
 }

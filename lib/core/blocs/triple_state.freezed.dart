@@ -26,10 +26,10 @@ mixin _$TripleState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
-    TResult Function()? loading,
-    TResult Function(Exception error)? failure,
-    TResult Function(T data)? success,
+    TResult? Function()? $default, {
+    TResult? Function()? loading,
+    TResult? Function(Exception error)? failure,
+    TResult? Function(T data)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$TripleState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_TripleState<T> value)? $default, {
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Failure<T> value)? failure,
-    TResult Function(_Success<T> value)? success,
+    TResult? Function(_TripleState<T> value)? $default, {
+    TResult? Function(_Loading<T> value)? loading,
+    TResult? Function(_Failure<T> value)? failure,
+    TResult? Function(_Success<T> value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,17 +72,18 @@ mixin _$TripleState<T> {
 abstract class $TripleStateCopyWith<T, $Res> {
   factory $TripleStateCopyWith(
           TripleState<T> value, $Res Function(TripleState<T>) then) =
-      _$TripleStateCopyWithImpl<T, $Res>;
+      _$TripleStateCopyWithImpl<T, $Res, TripleState<T>>;
 }
 
 /// @nodoc
-class _$TripleStateCopyWithImpl<T, $Res>
+class _$TripleStateCopyWithImpl<T, $Res, $Val extends TripleState<T>>
     implements $TripleStateCopyWith<T, $Res> {
   _$TripleStateCopyWithImpl(this._value, this._then);
 
-  final TripleState<T> _value;
   // ignore: unused_field
-  final $Res Function(TripleState<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -94,14 +95,11 @@ abstract class _$$_TripleStateCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_TripleStateCopyWithImpl<T, $Res>
-    extends _$TripleStateCopyWithImpl<T, $Res>
+    extends _$TripleStateCopyWithImpl<T, $Res, _$_TripleState<T>>
     implements _$$_TripleStateCopyWith<T, $Res> {
   __$$_TripleStateCopyWithImpl(
       _$_TripleState<T> _value, $Res Function(_$_TripleState<T>) _then)
-      : super(_value, (v) => _then(v as _$_TripleState<T>));
-
-  @override
-  _$_TripleState<T> get _value => super._value as _$_TripleState<T>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -137,10 +135,10 @@ class _$_TripleState<T> implements _TripleState<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
-    TResult Function()? loading,
-    TResult Function(Exception error)? failure,
-    TResult Function(T data)? success,
+    TResult? Function()? $default, {
+    TResult? Function()? loading,
+    TResult? Function(Exception error)? failure,
+    TResult? Function(T data)? success,
   }) {
     return $default?.call();
   }
@@ -174,10 +172,10 @@ class _$_TripleState<T> implements _TripleState<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_TripleState<T> value)? $default, {
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Failure<T> value)? failure,
-    TResult Function(_Success<T> value)? success,
+    TResult? Function(_TripleState<T> value)? $default, {
+    TResult? Function(_Loading<T> value)? loading,
+    TResult? Function(_Failure<T> value)? failure,
+    TResult? Function(_Success<T> value)? success,
   }) {
     return $default?.call(this);
   }
@@ -211,14 +209,11 @@ abstract class _$$_LoadingCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<T, $Res>
-    extends _$TripleStateCopyWithImpl<T, $Res>
+    extends _$TripleStateCopyWithImpl<T, $Res, _$_Loading<T>>
     implements _$$_LoadingCopyWith<T, $Res> {
   __$$_LoadingCopyWithImpl(
       _$_Loading<T> _value, $Res Function(_$_Loading<T>) _then)
-      : super(_value, (v) => _then(v as _$_Loading<T>));
-
-  @override
-  _$_Loading<T> get _value => super._value as _$_Loading<T>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -254,10 +249,10 @@ class _$_Loading<T> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
-    TResult Function()? loading,
-    TResult Function(Exception error)? failure,
-    TResult Function(T data)? success,
+    TResult? Function()? $default, {
+    TResult? Function()? loading,
+    TResult? Function(Exception error)? failure,
+    TResult? Function(T data)? success,
   }) {
     return loading?.call();
   }
@@ -291,10 +286,10 @@ class _$_Loading<T> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_TripleState<T> value)? $default, {
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Failure<T> value)? failure,
-    TResult Function(_Success<T> value)? success,
+    TResult? Function(_TripleState<T> value)? $default, {
+    TResult? Function(_Loading<T> value)? loading,
+    TResult? Function(_Failure<T> value)? failure,
+    TResult? Function(_Success<T> value)? success,
   }) {
     return loading?.call(this);
   }
@@ -324,26 +319,25 @@ abstract class _$$_FailureCopyWith<T, $Res> {
   factory _$$_FailureCopyWith(
           _$_Failure<T> value, $Res Function(_$_Failure<T>) then) =
       __$$_FailureCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({Exception error});
 }
 
 /// @nodoc
 class __$$_FailureCopyWithImpl<T, $Res>
-    extends _$TripleStateCopyWithImpl<T, $Res>
+    extends _$TripleStateCopyWithImpl<T, $Res, _$_Failure<T>>
     implements _$$_FailureCopyWith<T, $Res> {
   __$$_FailureCopyWithImpl(
       _$_Failure<T> _value, $Res Function(_$_Failure<T>) _then)
-      : super(_value, (v) => _then(v as _$_Failure<T>));
+      : super(_value, _then);
 
-  @override
-  _$_Failure<T> get _value => super._value as _$_Failure<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$_Failure<T>(
-      error == freezed
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Exception,
@@ -369,15 +363,15 @@ class _$_Failure<T> implements _Failure<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Failure<T> &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FailureCopyWith<T, _$_Failure<T>> get copyWith =>
       __$$_FailureCopyWithImpl<T, _$_Failure<T>>(this, _$identity);
 
@@ -395,10 +389,10 @@ class _$_Failure<T> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
-    TResult Function()? loading,
-    TResult Function(Exception error)? failure,
-    TResult Function(T data)? success,
+    TResult? Function()? $default, {
+    TResult? Function()? loading,
+    TResult? Function(Exception error)? failure,
+    TResult? Function(T data)? success,
   }) {
     return failure?.call(error);
   }
@@ -432,10 +426,10 @@ class _$_Failure<T> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_TripleState<T> value)? $default, {
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Failure<T> value)? failure,
-    TResult Function(_Success<T> value)? success,
+    TResult? Function(_TripleState<T> value)? $default, {
+    TResult? Function(_Loading<T> value)? loading,
+    TResult? Function(_Failure<T> value)? failure,
+    TResult? Function(_Success<T> value)? success,
   }) {
     return failure?.call(this);
   }
@@ -470,26 +464,25 @@ abstract class _$$_SuccessCopyWith<T, $Res> {
   factory _$$_SuccessCopyWith(
           _$_Success<T> value, $Res Function(_$_Success<T>) then) =
       __$$_SuccessCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({T data});
 }
 
 /// @nodoc
 class __$$_SuccessCopyWithImpl<T, $Res>
-    extends _$TripleStateCopyWithImpl<T, $Res>
+    extends _$TripleStateCopyWithImpl<T, $Res, _$_Success<T>>
     implements _$$_SuccessCopyWith<T, $Res> {
   __$$_SuccessCopyWithImpl(
       _$_Success<T> _value, $Res Function(_$_Success<T>) _then)
-      : super(_value, (v) => _then(v as _$_Success<T>));
+      : super(_value, _then);
 
-  @override
-  _$_Success<T> get _value => super._value as _$_Success<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_$_Success<T>(
-      data == freezed
+      null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
@@ -524,6 +517,7 @@ class _$_Success<T> implements _Success<T> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SuccessCopyWith<T, _$_Success<T>> get copyWith =>
       __$$_SuccessCopyWithImpl<T, _$_Success<T>>(this, _$identity);
 
@@ -541,10 +535,10 @@ class _$_Success<T> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
-    TResult Function()? loading,
-    TResult Function(Exception error)? failure,
-    TResult Function(T data)? success,
+    TResult? Function()? $default, {
+    TResult? Function()? loading,
+    TResult? Function(Exception error)? failure,
+    TResult? Function(T data)? success,
   }) {
     return success?.call(data);
   }
@@ -578,10 +572,10 @@ class _$_Success<T> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_TripleState<T> value)? $default, {
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Failure<T> value)? failure,
-    TResult Function(_Success<T> value)? success,
+    TResult? Function(_TripleState<T> value)? $default, {
+    TResult? Function(_Loading<T> value)? loading,
+    TResult? Function(_Failure<T> value)? failure,
+    TResult? Function(_Success<T> value)? success,
   }) {
     return success?.call(this);
   }
