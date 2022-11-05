@@ -16,7 +16,6 @@ class AboutCubit extends Cubit<AboutState> {
   Future<void> getAbout() async {
     emit(const TripleState.loading());
 
-    await Future<dynamic>.delayed(const Duration(seconds: 10));
     final result = await _aboutRepository.getAbout();
 
     result.when(

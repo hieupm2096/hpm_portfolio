@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:hpm_portfolio/core/network/interceptors/dio_error_l10n.dart';
 import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
 import 'package:hpm_portfolio/features/home/widgets/about_shimmer.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
@@ -18,12 +19,12 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     final _content = content ??
         '''
-Hello there, I’m Alexis 👋🏻, a Paris based designer currently focused on building design systems and shaping relevant interfaces. I’m deeply passionate about creating bridge between business vision and users expectations.
+Hello there, I'm Alexis 👋🏻, a Paris based designer currently focused on building design systems and shaping relevant interfaces. I’m deeply passionate about creating bridge between business vision and users expectations.
 
 As a **(UX) designer**, I love working with agile methodologies in the whole lifecycle of a product in collaboration with the product manager and the developers : organizing workshops, listening to our users an shaping with them the tool they will use
 every day.
 
-As a **front-end designer**, I undertand the development team and — when I am not developping it myself — I always design with the front-end skills of the team in mind. I am used to implement my prototypes in vanilla HTML/CSS, JSX/CSS-in-JS or  ELM. 
+As a **front-end designer**, I understand the development team and — when I am not developping it myself — I always design with the front-end skills of the team in mind. I am used to implement my prototypes in vanilla HTML/CSS, JSX/CSS-in-JS or  ELM. 
 Besides my job I am a huge music-lover, a fitness addict, a book lover, a aesthetic admirer, a relentless onlooker & sometimes a geek.
 
 I am currently learning p5.js for the purpose of making generative art.
@@ -50,7 +51,7 @@ class AboutBlocWrapper extends StatelessWidget {
         state.maybeWhen(
           () {},
           failure: (error) {
-            debugPrint(error.toString());
+            debugPrint(error.localize(context));
           },
           orElse: () {},
         );
