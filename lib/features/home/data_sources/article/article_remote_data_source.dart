@@ -12,11 +12,10 @@ abstract class ArticleRemoteDataSource {
 
   @GET('/api/articles')
   Future<BaseResponse<List<ArticleModel>>> getArticles({
-    @Query('populate[cover][fields]')
-        String coverFields = 'name,url,width,height',
+    @Query('populate[cover][fields]') String coverFields = 'name,url',
     @Query('populate[category][fields]') String categoryFields = 'name',
     @Query('populate[author][fields]') String authorFields = 'name',
-    @Query(r'populate[category][filters][name][$eq]') String? category,
+    @Query(r'filters[category][name][$eq]') String? category,
     @Query('sort') String? sort = 'publishedAt:desc',
     @Query('pagination[page]') int page = 1,
     @Query('pagination[pageSize]') int pageSize = 100,

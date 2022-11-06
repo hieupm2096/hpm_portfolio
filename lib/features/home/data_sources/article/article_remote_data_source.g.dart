@@ -20,7 +20,7 @@ class _ArticleRemoteDataSource implements ArticleRemoteDataSource {
 
   @override
   Future<BaseResponse<List<ArticleModel>>> getArticles({
-    coverFields = 'name,url,width,height',
+    coverFields = 'name,url',
     categoryFields = 'name',
     authorFields = 'name',
     category,
@@ -33,7 +33,7 @@ class _ArticleRemoteDataSource implements ArticleRemoteDataSource {
       r'populate[cover][fields]': coverFields,
       r'populate[category][fields]': categoryFields,
       r'populate[author][fields]': authorFields,
-      r'populate[category][filters][name][$eq]': category,
+      r'filters[category][name][$eq]': category,
       r'sort': sort,
       r'pagination[page]': page,
       r'pagination[pageSize]': pageSize,
