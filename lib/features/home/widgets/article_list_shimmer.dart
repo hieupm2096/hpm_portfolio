@@ -17,22 +17,40 @@ class ArticleListShimmer extends StatelessWidget {
         itemCount: 4,
         itemBuilder: (context, index) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            ShimmerWidget(height: shimmerHeight),
-            SizedBox(height: gutterHeight),
-            ShimmerWidget(height: shimmerHeight),
-            SizedBox(height: gutterHeight),
-            ShimmerWidget(height: shimmerHeight),
-            SizedBox(height: gutterHeight),
-            ShimmerWidget(height: shimmerHeight),
-            SizedBox(height: gutterHeight),
-            FractionallySizedBox(
-              widthFactor: 0.7,
-              child: ShimmerWidget(height: shimmerHeight),
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Expanded(
+                  child: ShimmerWidget(
+                    height: 140,
+                  ),
+                ),
+                const SizedBox(width: 24),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      ShimmerWidget(height: shimmerHeight),
+                      SizedBox(height: gutterHeight),
+                      ShimmerWidget(height: shimmerHeight),
+                      SizedBox(height: gutterHeight),
+                      ShimmerWidget(height: shimmerHeight),
+                      SizedBox(height: gutterHeight),
+                      FractionallySizedBox(
+                        widthFactor: 0.7,
+                        child: ShimmerWidget(height: shimmerHeight),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ],
         ),
-        separatorBuilder: (context, index) => const SizedBox(height: 20),
+        separatorBuilder: (context, index) => const SizedBox(height: 32),
       ),
     );
   }

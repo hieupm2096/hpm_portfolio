@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hpm_portfolio/di.dart';
 import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
 import 'package:hpm_portfolio/features/home/blocs/article/article_cubit.dart';
+import 'package:hpm_portfolio/features/home/blocs/project/project_cubit.dart';
 import 'package:hpm_portfolio/features/home/repos/about_repository.dart';
 import 'package:hpm_portfolio/features/home/repos/article_repository.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 import 'package:layout/layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,6 +28,11 @@ class HomePage extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ArticleCubit(
+              articleRepository: getIt<IArticleRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => ProjectCubit(
               articleRepository: getIt<IArticleRepository>(),
             ),
           ),
@@ -48,6 +55,7 @@ class _HomePageState extends State<_HomePage> {
   void initState() {
     context.read<AboutCubit>().getAbout();
     context.read<ArticleCubit>().getArticles();
+    context.read<ProjectCubit>().getWorks();
     super.initState();
   }
 
@@ -101,7 +109,7 @@ class _HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'Work')),
               ],
             ),
-            TableRow(children: [TableCell(child: ProjectList())]),
+            TableRow(children: [TableCell(child: ProjectListBlocWrapper())]),
             TableRow(
               children: [
                 TableCell(child: CategoryHeader(title: 'Good readings')),
@@ -156,7 +164,7 @@ class _HomeMedium extends StatelessWidget {
             ),
             TableRow(
               children: [
-                TableCell(child: ProjectList()),
+                TableCell(child: ProjectListBlocWrapper()),
                 TableCell(child: ArticleListBlocWrapper()),
               ],
             ),
@@ -194,7 +202,7 @@ class _HomeLarge extends StatelessWidget {
             TableRow(
               children: [
                 TableCell(child: AboutBlocWrapper()),
-                TableCell(child: ProjectList()),
+                TableCell(child: ProjectListBlocWrapper()),
                 TableCell(child: ArticleListBlocWrapper()),
               ],
             ),
@@ -223,8 +231,8 @@ class FooterText extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                debugPrint('onTap');
+              ..onTap = () async {
+                await _launchUrl('https://flutter.dev');
               },
           ),
           const TextSpan(text: '\nThanks to '),
@@ -236,21 +244,23 @@ class FooterText extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                debugPrint('onTap');
+              ..onTap = () async {
+                await _launchUrl('https://www.linkedin.com/in/alexisdoveil');
               },
           ),
           const TextSpan(text: ' for the fascinating design, '),
           TextSpan(
-            text: 'Velvetype',
+            text: 'floriankarsten',
             style: context.textTheme.labelMedium!.copyWith(
               color: AppColors.textAlt,
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.w600,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                debugPrint('onTap');
+              ..onTap = () async {
+                await _launchUrl(
+                  'https://floriankarsten.github.io/space-grotesk',
+                );
               },
           ),
           const TextSpan(text: ' for the Space Grotek and '),
@@ -262,8 +272,8 @@ class FooterText extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                debugPrint('onTap');
+              ..onTap = () async {
+                await _launchUrl('https://mschf.xyz');
               },
           ),
           const TextSpan(text: ' for the Times Newer Roman typeface.'),
@@ -273,5 +283,13 @@ class FooterText extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    final canLaunch = await canLaunchUrl(uri);
+    if (canLaunch) {
+      await launchUrl(uri);
+    }
   }
 }
