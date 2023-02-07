@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TapRegion extends StatelessWidget {
-  const TapRegion({
+class Tapable extends StatelessWidget {
+  const Tapable({
     super.key,
     required this.cursor,
     this.onTap,

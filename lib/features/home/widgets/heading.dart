@@ -95,7 +95,7 @@ class _HeadingLink extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: TapRegion(
+      child: Tapable(
         cursor: SystemMouseCursors.click,
         onTap: () async {
           if (url != null) {
