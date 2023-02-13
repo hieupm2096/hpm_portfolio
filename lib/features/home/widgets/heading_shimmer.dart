@@ -20,12 +20,23 @@ class HeadingShimmer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ShimmerWidget(height: shimmerHeight),
-        const SizedBox(height: gutterHeight),
-        const ShimmerWidget(height: shimmerHeight),
+        const FractionallySizedBox(
+          widthFactor: 0.3,
+          child: ShimmerWidget(height: shimmerHeight),
+        ),
         const SizedBox(height: gutterHeight),
         const FractionallySizedBox(
           widthFactor: 0.7,
+          child: ShimmerWidget(height: shimmerHeight),
+        ),
+        const SizedBox(height: gutterHeight),
+        const FractionallySizedBox(
+          widthFactor: 0.7,
+          child: ShimmerWidget(height: shimmerHeight),
+        ),
+        const SizedBox(height: gutterHeight),
+        const FractionallySizedBox(
+          widthFactor: 0.4,
           child: ShimmerWidget(height: shimmerHeight),
         ),
         SizedBox(height: gutter),

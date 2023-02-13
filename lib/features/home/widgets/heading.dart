@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
 import 'package:hpm_portfolio/features/home/widgets/heading_shimmer.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
@@ -37,7 +38,12 @@ class Heading extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: context.textTheme.displayLarge),
+          MarkdownBody(
+            data: title,
+            styleSheet: MarkdownStyleSheet.fromTheme(context.theme).copyWith(
+              p: context.textTheme.displayLarge,
+            ),
+          ),
           SizedBox(height: gutter),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
