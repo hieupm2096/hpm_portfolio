@@ -64,8 +64,7 @@ class _HomePageState extends State<_HomePage> {
     final padding = context.layout.value<double>(
       xs: 16,
       sm: 32,
-      md: 32,
-      lg: 64,
+      md: 64,
     );
 
     return SingleChildScrollView(
@@ -75,8 +74,8 @@ class _HomePageState extends State<_HomePage> {
           children: [
             AdaptiveBuilder(
               xs: (context) => const _HomeSmall(),
-              md: (context) => const _HomeMedium(),
-              lg: (context) => const _HomeLarge(),
+              sm: (context) => const _HomeMedium(),
+              md: (context) => const _HomeLarge(),
             ),
             const Footer(),
           ],

@@ -6,7 +6,6 @@ import 'package:hpm_portfolio/features/home/blocs/project/project_cubit.dart';
 import 'package:hpm_portfolio/features/home/models/article/article_model.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
-import 'package:hpm_portfolio/gen/env.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 
 class ProjectList extends StatelessWidget {
@@ -33,7 +32,7 @@ class ProjectList extends StatelessWidget {
               content: e.description ?? '',
               thumbnail: coverUrl != null
                   ? CachedNetworkImage(
-                      imageUrl: '${Env.host}$coverUrl',
+                      imageUrl: coverUrl,
                       errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                       ),
@@ -107,11 +106,7 @@ class ProjectListBlocWrapper extends StatelessWidget {
         return state.maybeWhen(
           SizedBox.shrink,
           loading: ProjectListShimmer.new,
-          success: (data) {
-            return ProjectList(
-              projects: data,
-            );
-          },
+          success: (data) => ProjectList(projects: data),
           orElse: SizedBox.shrink,
         );
       },

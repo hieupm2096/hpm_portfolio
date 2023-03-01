@@ -29,10 +29,9 @@ class Heading extends StatelessWidget {
     final padding = context.layout.value<double>(
       xs: 16,
       sm: 16,
-      md: 32,
-      lg: 12,
+      md: 12,
     );
-    final gutter = context.layout.value<double>(xs: 24, sm: 36, md: 56, lg: 64);
+    final gutter = context.layout.value<double>(xs: 24, sm: 36, md: 56);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: padding),
       child: Column(

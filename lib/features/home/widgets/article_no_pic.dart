@@ -32,10 +32,8 @@ class ArticleNoPic extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           '$label'
-          ' — '
-          '${Jiffy(
-            publishedDate ?? DateTime.now(),
-          ).format(DateFormat.MMMMddyyyy)}',
+          '${publishedDate != null ? ' — ' : ''}'
+          '${publishedDate != null ? Jiffy(publishedDate).format(DateFormat.MMMMddyyyy) : ''}',
           style: context.textTheme.labelMedium!.copyWith(
             color: AppColors.textAlt,
           ),

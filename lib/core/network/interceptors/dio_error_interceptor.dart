@@ -7,11 +7,12 @@ class DioErrorInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     switch (err.type) {
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionError:
+      case DioErrorType.connectionTimeout:
       case DioErrorType.sendTimeout:
       case DioErrorType.receiveTimeout:
         return handler.next(TimeoutException(err.requestOptions));
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         switch (err.response?.statusCode) {
           case 401:
           case 403:
@@ -39,10 +40,13 @@ class DioErrorInterceptor extends Interceptor {
             );
         }
         break;
-      case DioErrorType.other:
-        return handler.next(BadNetworkException(err.requestOptions));
       case DioErrorType.cancel:
         return handler.next(err);
+      case DioErrorType.badCertificate:
+        return handler
+            .next(BadCertificateException(requestOptions: err.requestOptions));
+      case DioErrorType.unknown:
+        return handler.next(BadNetworkException(err.requestOptions));
     }
 
     super.onError(err, handler);
@@ -59,21 +63,21 @@ class ResponseException extends DioError {
     super.response,
   });
 
-  // @override
-  // String toString() {
-  //   final data = response?.data;
-  //
-  //   if (data != null && data is Map<String, dynamic>) {
-  //     try {
-  //       final res = BaseResponse.fromJson(data, (json) => null);
-  //       return res.error?.message ?? 'Có lỗi xảy ra';
-  //     } on Exception {
-  //       return 'Có lỗi xảy ra';
-  //     }
-  //   }
-  //
-  //   return 'Có lỗi xảy ra';
-  // }
+// @override
+// String toString() {
+//   final data = response?.data;
+//
+//   if (data != null && data is Map<String, dynamic>) {
+//     try {
+//       final res = BaseResponse.fromJson(data, (json) => null);
+//       return res.error?.message ?? 'Có lỗi xảy ra';
+//     } on Exception {
+//       return 'Có lỗi xảy ra';
+//     }
+//   }
+//
+//   return 'Có lỗi xảy ra';
+// }
 }
 
 /// {@template interceptor}
@@ -83,10 +87,10 @@ class ServiceUnavailableException extends DioError {
   /// {@macro ServiceUnavailableException}
   ServiceUnavailableException({required super.requestOptions});
 
-  // @override
-  // String toString() {
-  //   return 'Dịch vụ hiện đang bị gián đoạn';
-  // }
+// @override
+// String toString() {
+//   return 'Dịch vụ hiện đang bị gián đoạn';
+// }
 }
 
 /// {@template interceptor}
@@ -99,10 +103,10 @@ class UnauthorizedException extends DioError {
     super.response,
   });
 
-  // @override
-  // String toString() {
-  //   return 'Thông tin tài khoản hoặc mật khẩu không đúng';
-  // }
+// @override
+// String toString() {
+//   return 'Thông tin tài khoản hoặc mật khẩu không đúng';
+// }
 }
 
 /// {@template interceptor}
@@ -115,10 +119,10 @@ class ForbiddenException extends DioError {
     super.response,
   });
 
-  // @override
-  // String toString() {
-  //   return 'Không có quyền truy cập';
-  // }
+// @override
+// String toString() {
+//   return 'Không có quyền truy cập';
+// }
 }
 
 /// {@template interceptor}
@@ -128,10 +132,10 @@ class BadNetworkException extends DioError {
   /// {@macro BadNetworkException}
   BadNetworkException(RequestOptions r) : super(requestOptions: r);
 
-  // @override
-  // String toString() {
-  //   return 'Không có kết nối, vui lòng thử lại';
-  // }
+// @override
+// String toString() {
+//   return 'Không có kết nối, vui lòng thử lại';
+// }
 }
 
 /// {@template interceptor}
@@ -141,8 +145,21 @@ class TimeoutException extends DioError {
   /// {@macro TimeoutException}
   TimeoutException(RequestOptions r) : super(requestOptions: r);
 
-  // @override
-  // String toString() {
-  //   return 'Kết nối bị gián đoạn, vui lòng thử lại';
-  // }
+// @override
+// String toString() {
+//   return 'Kết nối bị gián đoạn, vui lòng thử lại';
+// }
+}
+
+/// {@template interceptor}
+/// BadCertificateException
+/// {@endtemplate}
+class BadCertificateException extends DioError {
+  /// {@macro ServiceUnavailableException}
+  BadCertificateException({required super.requestOptions});
+
+// @override
+// String toString() {
+//   return 'Dịch vụ hiện đang bị gián đoạn';
+// }
 }
