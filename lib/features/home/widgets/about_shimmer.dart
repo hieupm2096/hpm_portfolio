@@ -15,9 +15,9 @@ class AboutShimmer extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 4,
-        itemBuilder: (context, index) => Column(
+        itemBuilder: (context, index) => const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             ShimmerWidget(height: shimmerHeight),
             SizedBox(height: gutterHeight),
             ShimmerWidget(height: shimmerHeight),

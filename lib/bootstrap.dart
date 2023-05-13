@@ -10,7 +10,7 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
-import 'package:hpm_portfolio/di.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
@@ -21,10 +21,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // Init log
   Loggy.initLoggy(logPrinter: const PrettyDeveloperPrinter());
 
-  configureDependencies();
-
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async => runApp(ProviderScope(child: await builder())),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

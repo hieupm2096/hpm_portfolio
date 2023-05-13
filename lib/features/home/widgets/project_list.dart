@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hpm_portfolio/core/network/interceptors/dio_error_l10n.dart';
-import 'package:hpm_portfolio/features/home/blocs/project/project_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hpm_portfolio/features/home/controllers/project/project_controller.dart';
 import 'package:hpm_portfolio/features/home/models/article/article_model.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
@@ -87,29 +86,17 @@ class ProjectList extends StatelessWidget {
   }
 }
 
-class ProjectListBlocWrapper extends StatelessWidget {
+class ProjectListBlocWrapper extends ConsumerWidget {
   const ProjectListBlocWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ProjectCubit, ProjectState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          () {},
-          failure: (error) {
-            debugPrint(error.localize(context));
-          },
-          orElse: () {},
-        );
-      },
-      builder: (context, state) {
-        return state.maybeWhen(
-          SizedBox.shrink,
-          loading: ProjectListShimmer.new,
-          success: (data) => ProjectList(projects: data),
-          orElse: SizedBox.shrink,
-        );
-      },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncProjects = ref.watch(getProjectsProvider);
+
+    return asyncProjects.when(
+      data: (data) => ProjectList(projects: data),
+      error: (error, stackTrace) => const SizedBox.shrink(),
+      loading: ProjectListShimmer.new,
     );
   }
 }

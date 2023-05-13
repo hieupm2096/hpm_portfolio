@@ -23,7 +23,7 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BaseResponse<AboutModel>>(Options(
       method: 'GET',
@@ -57,3 +57,23 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
     return requestOptions;
   }
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$aboutRDSHash() => r'4855b03b3d067911515220ff5ff43ec89d7042d1';
+
+/// See also [aboutRDS].
+@ProviderFor(aboutRDS)
+final aboutRDSProvider = Provider<AboutRemoteDataSource>.internal(
+  aboutRDS,
+  name: r'aboutRDSProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$aboutRDSHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AboutRDSRef = ProviderRef<AboutRemoteDataSource>;
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

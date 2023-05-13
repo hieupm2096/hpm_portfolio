@@ -15,24 +15,24 @@ class ArticleListShimmer extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 4,
-        itemBuilder: (context, index) => Column(
+        itemBuilder: (context, index) => const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Expanded(
+                Expanded(
                   child: ShimmerWidget(
                     height: 140,
                   ),
                 ),
-                const SizedBox(width: 24),
+                SizedBox(width: 24),
                 Expanded(
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       ShimmerWidget(height: shimmerHeight),
                       SizedBox(height: gutterHeight),
                       ShimmerWidget(height: shimmerHeight),

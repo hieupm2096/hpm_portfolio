@@ -1,12 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hpm_portfolio/di.dart';
-import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
-import 'package:hpm_portfolio/features/home/blocs/article/article_cubit.dart';
-import 'package:hpm_portfolio/features/home/blocs/project/project_cubit.dart';
-import 'package:hpm_portfolio/features/home/repos/about_repository.dart';
-import 'package:hpm_portfolio/features/home/repos/article_repository.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 import 'package:layout/layout.dart';
@@ -17,68 +10,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AboutCubit(
-              aboutRepository: getIt<IAboutRepository>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => ArticleCubit(
-              articleRepository: getIt<IArticleRepository>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => ProjectCubit(
-              articleRepository: getIt<IArticleRepository>(),
-            ),
-          ),
-        ],
-        child: const _HomePage(),
-      ),
-    );
-  }
-}
-
-class _HomePage extends StatefulWidget {
-  const _HomePage();
-
-  @override
-  State<_HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<_HomePage> {
-  @override
-  void initState() {
-    context.read<AboutCubit>().getAbout();
-    context.read<ArticleCubit>().getArticles();
-    context.read<ProjectCubit>().getWorks();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final padding = context.layout.value<double>(
       xs: 16,
       sm: 32,
       md: 64,
     );
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(padding),
-        child: Column(
-          children: [
-            AdaptiveBuilder(
-              xs: (context) => const _HomeSmall(),
-              sm: (context) => const _HomeMedium(),
-              md: (context) => const _HomeLarge(),
-            ),
-            const Footer(),
-          ],
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(padding),
+          child: Column(
+            children: [
+              AdaptiveBuilder(
+                xs: (context) => const _HomeSmall(),
+                sm: (context) => const _HomeMedium(),
+                md: (context) => const _HomeLarge(),
+              ),
+              const Footer(),
+            ],
+          ),
         ),
       ),
     );
@@ -93,7 +45,7 @@ class _HomeSmall extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HeadingBlocWrapper(),
+        const HeadingWrapper(),
         Table(
           border: TableBorder.all(color: AppColors.text),
           children: const [
@@ -102,7 +54,7 @@ class _HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'About')),
               ],
             ),
-            TableRow(children: [TableCell(child: AboutBlocWrapper())]),
+            TableRow(children: [TableCell(child: AboutWrapper())]),
             TableRow(
               children: [
                 TableCell(child: CategoryHeader(title: 'Work')),
@@ -114,7 +66,7 @@ class _HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'Good readings')),
               ],
             ),
-            TableRow(children: [TableCell(child: ArticleListBlocWrapper())]),
+            TableRow(children: [TableCell(child: ArticleListWrapper())]),
           ],
         ),
       ],
@@ -130,7 +82,7 @@ class _HomeMedium extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HeadingBlocWrapper(),
+        const HeadingWrapper(),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -144,7 +96,7 @@ class _HomeMedium extends StatelessWidget {
               vertical: BorderSide(color: AppColors.text),
             ),
           ),
-          child: AboutBlocWrapper(),
+          child: AboutWrapper(),
         ),
         Table(
           border: TableBorder.all(color: AppColors.text),
@@ -164,7 +116,7 @@ class _HomeMedium extends StatelessWidget {
             TableRow(
               children: [
                 TableCell(child: ProjectListBlocWrapper()),
-                TableCell(child: ArticleListBlocWrapper()),
+                TableCell(child: ArticleListWrapper()),
               ],
             ),
           ],
@@ -182,7 +134,7 @@ class _HomeLarge extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HeadingBlocWrapper(),
+        const HeadingWrapper(),
         Table(
           border: TableBorder.all(color: AppColors.text),
           columnWidths: const {
@@ -200,9 +152,9 @@ class _HomeLarge extends StatelessWidget {
             ),
             TableRow(
               children: [
-                TableCell(child: AboutBlocWrapper()),
+                TableCell(child: AboutWrapper()),
                 TableCell(child: ProjectListBlocWrapper()),
-                TableCell(child: ArticleListBlocWrapper()),
+                TableCell(child: ArticleListWrapper()),
               ],
             ),
           ],

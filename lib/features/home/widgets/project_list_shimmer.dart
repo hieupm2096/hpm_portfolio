@@ -18,9 +18,9 @@ class ProjectListShimmer extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 2,
-        itemBuilder: (context, index) => Column(
+        itemBuilder: (context, index) => const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             ShimmerWidget(height: coverShimmerHeight),
             SizedBox(height: gutterHeight),
             ShimmerWidget(height: titleShimmerHeight),

@@ -55,10 +55,10 @@ class Result<Success, Failure> with _$Result<Success, Failure> {
     return when(
       success: (success) => success == null
           ? 'Success: (null)'
-          : 'Success: ${success.toString()}',
+          : 'Success: $success',
       failure: (failure) => failure == null
           ? 'Failure: (null)'
-          : 'Failure: ${failure.toString()}',
+          : 'Failure: $failure',
     );
   }
 }

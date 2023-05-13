@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hpm_portfolio/core/network/interceptors/dio_error_l10n.dart';
-import 'package:hpm_portfolio/features/home/blocs/article/article_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hpm_portfolio/features/home/controllers/article/article_controller.dart';
 import 'package:hpm_portfolio/features/home/models/article/article_model.dart';
 import 'package:hpm_portfolio/features/home/widgets/intersect_category.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
-import 'package:hpm_portfolio/gen/env.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -35,7 +33,7 @@ class ArticleList extends StatelessWidget {
               publishedDate: e.publishedAt,
               thumbnail: coverUrl != null
                   ? CachedNetworkImage(
-                      imageUrl: '${Env.host}$coverUrl',
+                      imageUrl: coverUrl,
                       errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                       ),
@@ -152,33 +150,17 @@ class ArticleList extends StatelessWidget {
   }
 }
 
-class ArticleListBlocWrapper extends StatelessWidget {
-  const ArticleListBlocWrapper({super.key});
+class ArticleListWrapper extends ConsumerWidget {
+  const ArticleListWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ArticleCubit, ArticleState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          () {},
-          failure: (error) {
-            debugPrint(error.localize(context));
-          },
-          orElse: () {},
-        );
-      },
-      builder: (context, state) {
-        return state.maybeWhen(
-          SizedBox.shrink,
-          loading: ArticleListShimmer.new,
-          success: (data) {
-            return ArticleList(
-              articles: data,
-            );
-          },
-          orElse: SizedBox.shrink,
-        );
-      },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncArticles = ref.watch(getArticlesProvider);
+
+    return asyncArticles.when(
+      data: (data) => ArticleList(articles: data),
+      error: (error, stackTrace) => const SizedBox.shrink(),
+      loading: ArticleListShimmer.new,
     );
   }
 }

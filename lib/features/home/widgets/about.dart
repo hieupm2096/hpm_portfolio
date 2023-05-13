@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:hpm_portfolio/core/network/interceptors/dio_error_l10n.dart';
-import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hpm_portfolio/features/home/controllers/about/about_controller.dart';
 import 'package:hpm_portfolio/features/home/widgets/about_shimmer.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
@@ -17,7 +16,7 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _content = content ??
+    final content = this.content ??
         '''
 Hello there, I'm Alexis 👋🏻, a Paris based designer currently focused on building design systems and shaping relevant interfaces. I’m deeply passionate about creating bridge between business vision and users expectations.
 
@@ -32,7 +31,7 @@ I am currently learning p5.js for the purpose of making generative art.
 
     return Inset(
       child: MarkdownBody(
-        data: _content,
+        data: content,
         styleSheet: MarkdownStyleSheet.fromTheme(context.theme).copyWith(
           p: context.textTheme.bodyLarge,
         ),
@@ -41,29 +40,17 @@ I am currently learning p5.js for the purpose of making generative art.
   }
 }
 
-class AboutBlocWrapper extends StatelessWidget {
-  const AboutBlocWrapper({super.key});
+class AboutWrapper extends ConsumerWidget {
+  const AboutWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<AboutCubit, AboutState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          () {},
-          failure: (error) {
-            debugPrint(error.localize(context));
-          },
-          orElse: () {},
-        );
-      },
-      builder: (context, state) {
-        return state.maybeWhen(
-          SizedBox.shrink,
-          loading: AboutShimmer.new,
-          success: (data) => About(content: data.content),
-          orElse: SizedBox.shrink,
-        );
-      },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncAbout = ref.watch(getAboutProvider);
+
+    return asyncAbout.when(
+      data: (data) => About(content: data.content),
+      error: (error, stackTrace) => const SizedBox.shrink(),
+      loading: AboutShimmer.new,
     );
   }
 }

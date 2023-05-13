@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:hpm_portfolio/features/home/blocs/about/about_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hpm_portfolio/features/home/controllers/about/about_controller.dart';
 import 'package:hpm_portfolio/features/home/widgets/heading_shimmer.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
@@ -127,37 +127,25 @@ class _HeadingLink extends StatelessWidget {
   }
 }
 
-class HeadingBlocWrapper extends StatelessWidget {
-  const HeadingBlocWrapper({super.key});
+class HeadingWrapper extends ConsumerWidget {
+  const HeadingWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<AboutCubit, AboutState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          () {},
-          failure: (error) {
-            debugPrint(error.toString());
-          },
-          orElse: () {},
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncAbout = ref.watch(getAboutProvider);
+
+    return asyncAbout.when(
+      data: (data) {
+        return Heading(
+          title: data.intro ?? '',
+          linkedInUrl: data.linkedin,
+          githubUrl: data.github,
+          emailUrl: data.email,
+          phoneNumber: data.phone,
         );
       },
-      builder: (context, state) {
-        return state.maybeWhen(
-          SizedBox.shrink,
-          loading: HeadingShimmer.new,
-          success: (data) {
-            return Heading(
-              title: data.intro ?? '',
-              linkedInUrl: data.linkedin,
-              githubUrl: data.github,
-              emailUrl: data.email,
-              phoneNumber: data.phone,
-            );
-          },
-          orElse: SizedBox.shrink,
-        );
-      },
+      error: (error, stackTrace) => const SizedBox.shrink(),
+      loading: HeadingShimmer.new,
     );
   }
 }

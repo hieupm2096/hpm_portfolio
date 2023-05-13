@@ -25,8 +25,8 @@ class Footer extends StatelessWidget {
           right: BorderSide(color: AppColors.text),
         ),
       ),
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           Expanded(child: FooterText()),
         ],
       ),
