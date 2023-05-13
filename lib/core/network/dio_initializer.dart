@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 import 'package:hpm_portfolio/core/network/interceptors/dio_error_interceptor.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 /// {@template DioInitializer}
 /// DioInitializer implementation using [Dio]
@@ -23,7 +23,12 @@ class DioInitializer {
     _dio!.options.sendTimeout = const Duration(seconds: 30);
     _dio!.options.receiveTimeout = const Duration(seconds: 30);
     if (kDebugMode) {
-      _dio!.interceptors.add(PrettyDioLogger());
+      dio.interceptors.add(
+        LoggyDioInterceptor(
+          requestBody: true,
+          requestHeader: true,
+        ),
+      );
     }
 
     _dio!.interceptors.add(DioErrorInterceptor());

@@ -9,12 +9,17 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:hpm_portfolio/di.dart';
+import 'package:loggy/loggy.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
+
+  // Init log
+  Loggy.initLoggy(logPrinter: const PrettyDeveloperPrinter());
 
   configureDependencies();
 
