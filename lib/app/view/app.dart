@@ -25,7 +25,11 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const HomePage(),
+        title: 'Hieupmmm',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const HomePage(),
+        },
       ),
     );
   }

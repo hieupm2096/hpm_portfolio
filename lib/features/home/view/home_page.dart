@@ -16,20 +16,24 @@ class HomePage extends StatelessWidget {
       md: 64,
     );
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(padding),
-          child: Column(
-            children: [
-              AdaptiveBuilder(
-                xs: (context) => const _HomeSmall(),
-                sm: (context) => const _HomeMedium(),
-                md: (context) => const _HomeLarge(),
-              ),
-              const Footer(),
-            ],
+    return Title(
+      color: AppColors.text,
+      title: 'Hieupmmm - Home Page',
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(padding),
+            child: Column(
+              children: [
+                AdaptiveBuilder(
+                  xs: (context) => const _HomeSmall(),
+                  sm: (context) => const _HomeMedium(),
+                  md: (context) => const _HomeLarge(),
+                ),
+                const Footer(),
+              ],
+            ),
           ),
         ),
       ),
