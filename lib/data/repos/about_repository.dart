@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hpm_portfolio/core/core.dart';
-import 'package:hpm_portfolio/features/home/data_sources/about/about_remote_data_source.dart';
-import 'package:hpm_portfolio/features/home/models/models.dart';
+import 'package:hpm_portfolio/data/data_sources/about/about_remote_data_source.dart';
+import 'package:hpm_portfolio/data/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'about_repository.g.dart';

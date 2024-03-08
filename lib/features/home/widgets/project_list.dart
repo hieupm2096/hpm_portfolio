@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hpm_portfolio/data/models/article/article_model.dart';
 import 'package:hpm_portfolio/features/home/controllers/project/project_controller.dart';
-import 'package:hpm_portfolio/features/home/models/article/article_model.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';

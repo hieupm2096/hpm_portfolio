@@ -1,5 +1,5 @@
-import 'package:hpm_portfolio/features/home/models/about/about_model.dart';
-import 'package:hpm_portfolio/features/home/repos/about_repository.dart';
+import 'package:hpm_portfolio/data/models/about/about_model.dart';
+import 'package:hpm_portfolio/data/repos/about_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'about_controller.g.dart';

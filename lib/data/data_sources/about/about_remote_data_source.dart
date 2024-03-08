@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hpm_portfolio/core/core.dart';
-import 'package:hpm_portfolio/features/home/models/models.dart';
+import 'package:hpm_portfolio/data/models/models.dart';
 import 'package:hpm_portfolio/gen/env.dart';
 import 'package:retrofit/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
