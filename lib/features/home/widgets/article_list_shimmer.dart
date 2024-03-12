@@ -45,7 +45,7 @@ class ArticleListShimmer extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ],

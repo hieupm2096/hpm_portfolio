@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="development" type="FlutterRunConfigurationType" factoryName="Flutter">
-    <option name="additionalArgs" value="--dart-define=HOST=http://localhost:1337" />
+    <option name="additionalArgs" value="--dart-define=HOST=http://localhost:1337 --dart-define=STRAPI_API_TOKEN=8801fa2aff7ceb6a3f18587064765c47929ffb4fba97c8372afd4293a4b0400b2499303c2b8591099a013c15173295a61a6b8fe18cc4cca72be465e8aa681879fb7a1cea14264c6e9a0196848e0b9b3c574f388989a5689b5903056ccff4c0db6d15dbdf50a8c0a73f07a5928a1701595c9c62b058062e3b726a785b3854bd8a" />
     <option name="filePath" value="$PROJECT_DIR$/lib/main_development.dart" />
     <method v="2" />
   </configuration>

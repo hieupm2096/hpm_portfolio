@@ -47,7 +47,7 @@ class WidgetbookWidgets {
           name: 'Heading',
           builder: (context) {
             return Heading(
-              title: context.knobs.text(
+              intro: context.knobs.text(
                 label: 'text',
                 initialValue: 'Hi. I am Alexis,'
                     '\nA french designer who can code.'

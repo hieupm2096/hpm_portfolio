@@ -4,3 +4,5 @@ define_env:
   fields:
     HOST:
       type: String
+    STRAPI_API_TOKEN:
+      type: String

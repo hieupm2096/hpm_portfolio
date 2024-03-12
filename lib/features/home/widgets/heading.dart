@@ -11,14 +11,14 @@ import 'package:url_launcher/url_launcher.dart';
 class Heading extends StatelessWidget {
   const Heading({
     super.key,
-    required this.title,
+    required this.intro,
     this.linkedInUrl,
     this.githubUrl,
     this.emailUrl,
     this.phoneNumber,
   });
 
-  final String title;
+  final String intro;
   final String? linkedInUrl;
   final String? githubUrl;
   final String? emailUrl;
@@ -38,7 +38,8 @@ class Heading extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MarkdownBody(
-            data: title,
+            data: intro,
+            softLineBreak: true,
             styleSheet: MarkdownStyleSheet.fromTheme(context.theme).copyWith(
               p: context.textTheme.displayLarge,
             ),
@@ -137,7 +138,7 @@ class HeadingWrapper extends ConsumerWidget {
     return asyncAbout.when(
       data: (data) {
         return Heading(
-          title: data.intro ?? '',
+          intro: data.intro ?? '',
           linkedInUrl: data.linkedin,
           githubUrl: data.github,
           emailUrl: data.email,

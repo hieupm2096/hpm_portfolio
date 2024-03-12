@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
-import 'package:hpm_portfolio/core/network/interceptors/dio_error_interceptor.dart';
+import 'package:hpm_portfolio/core/network/interceptors/auth_interceptor.dart';
+import 'package:hpm_portfolio/core/network/interceptors/dio_exception_interceptor.dart';
+import 'package:hpm_portfolio/core/network/interceptors/dio_loggy_interceptor.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_provider.g.dart';
@@ -12,6 +13,9 @@ Dio dio(DioRef ref) {
   dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.sendTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 10);
+
+  dio.interceptors.add(AuthInterceptor());
+
   if (kDebugMode) {
     dio.interceptors.add(
       LoggyDioInterceptor(
@@ -20,6 +24,6 @@ Dio dio(DioRef ref) {
       ),
     );
   }
-  dio.interceptors.add(DioErrorInterceptor());
+  dio.interceptors.add(DioExceptionInterceptor());
   return dio;
 }

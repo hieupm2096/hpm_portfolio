@@ -3,16 +3,17 @@ import 'package:dio/dio.dart';
 /// {@template dio_error_interceptor}
 /// Dio Error Interceptor
 /// {@endtemplate}
-class DioErrorInterceptor extends Interceptor {
+class DioExceptionInterceptor extends Interceptor {
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     switch (err.type) {
-      case DioErrorType.connectionError:
-      case DioErrorType.connectionTimeout:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.connectionError:
         return handler.next(TimeoutException(err.requestOptions));
-      case DioErrorType.badResponse:
+
+      case DioExceptionType.badResponse:
         switch (err.response?.statusCode) {
           case 401:
           case 403:
@@ -25,6 +26,7 @@ class DioErrorInterceptor extends Interceptor {
           case 400:
           case 404:
           case 409:
+          case 422:
           case 500:
             return handler.next(
               ResponseException(
@@ -39,14 +41,13 @@ class DioErrorInterceptor extends Interceptor {
               ),
             );
         }
-        break;
-      case DioErrorType.cancel:
+
+      case DioExceptionType.badCertificate:
+        return handler.next(BadCertificateException(err.requestOptions));
+      case DioExceptionType.unknown:
+        return handler.next(UnknownErrorException(err.requestOptions));
+      case DioExceptionType.cancel:
         return handler.next(err);
-      case DioErrorType.badCertificate:
-        return handler
-            .next(BadCertificateException(requestOptions: err.requestOptions));
-      case DioErrorType.unknown:
-        return handler.next(BadNetworkException(err.requestOptions));
     }
 
     super.onError(err, handler);
@@ -56,110 +57,108 @@ class DioErrorInterceptor extends Interceptor {
 /// {@template interceptor}
 /// ResponseException
 /// {@endtemplate}
-class ResponseException extends DioError {
+class ResponseException extends DioException {
   /// {@macro ResponseException}
   ResponseException({
     required super.requestOptions,
     super.response,
   });
 
-// @override
-// String toString() {
-//   final data = response?.data;
-//
-//   if (data != null && data is Map<String, dynamic>) {
-//     try {
-//       final res = BaseResponse.fromJson(data, (json) => null);
-//       return res.error?.message ?? 'Có lỗi xảy ra';
-//     } on Exception {
-//       return 'Có lỗi xảy ra';
-//     }
-//   }
-//
-//   return 'Có lỗi xảy ra';
-// }
+  @override
+  String toString() {
+    final data = response?.data;
+
+    if (data != null && data is Map<String, dynamic>) {
+      try {
+        final message = data['message'] as String?;
+        final detail = data['detail'] as String?;
+        final title = data['title'] as String?;
+        return detail ?? title ?? message ?? "There's was error";
+      } on Exception {
+        return "There's was error";
+      }
+    }
+
+    return "There's was error";
+  }
 }
 
 /// {@template interceptor}
 /// ServiceUnavailableException
 /// {@endtemplate}
-class ServiceUnavailableException extends DioError {
+class ServiceUnavailableException extends DioException {
   /// {@macro ServiceUnavailableException}
   ServiceUnavailableException({required super.requestOptions});
-
-// @override
-// String toString() {
-//   return 'Dịch vụ hiện đang bị gián đoạn';
-// }
 }
 
 /// {@template interceptor}
 /// UnauthorizedException
 /// {@endtemplate}
-class UnauthorizedException extends DioError {
+class UnauthorizedException extends DioException {
   /// {@macro UnauthorizedException}
   UnauthorizedException({
     required super.requestOptions,
     super.response,
   });
 
-// @override
-// String toString() {
-//   return 'Thông tin tài khoản hoặc mật khẩu không đúng';
-// }
+  @override
+  String toString() {
+    final data = response?.data;
+
+    if (data != null && data is Map<String, dynamic>) {
+      try {
+        final message = data['message'] as String?;
+        final detail = data['detail'] as String?;
+        final title = data['title'] as String?;
+        return detail ?? title ?? message ?? 'Unauthorized';
+      } on Exception {
+        return 'Unauthorized';
+      }
+    }
+
+    return 'Unauthorized';
+  }
 }
 
 /// {@template interceptor}
 /// ForbiddenException
 /// {@endtemplate}
-class ForbiddenException extends DioError {
+class ForbiddenException extends DioException {
   /// {@macro ForbiddenException}
   ForbiddenException({
     required super.requestOptions,
     super.response,
   });
-
-// @override
-// String toString() {
-//   return 'Không có quyền truy cập';
-// }
 }
 
 /// {@template interceptor}
 /// BadNetworkException
 /// {@endtemplate}
-class BadNetworkException extends DioError {
+class BadNetworkException extends DioException {
   /// {@macro BadNetworkException}
   BadNetworkException(RequestOptions r) : super(requestOptions: r);
-
-// @override
-// String toString() {
-//   return 'Không có kết nối, vui lòng thử lại';
-// }
 }
 
 /// {@template interceptor}
 /// TimeoutException
 /// {@endtemplate}
-class TimeoutException extends DioError {
+class TimeoutException extends DioException {
   /// {@macro TimeoutException}
   TimeoutException(RequestOptions r) : super(requestOptions: r);
-
-// @override
-// String toString() {
-//   return 'Kết nối bị gián đoạn, vui lòng thử lại';
-// }
 }
 
 /// {@template interceptor}
 /// BadCertificateException
 /// {@endtemplate}
-class BadCertificateException extends DioError {
-  /// {@macro ServiceUnavailableException}
-  BadCertificateException({required super.requestOptions});
+class BadCertificateException extends DioException {
+  /// {@macro BadCertificateException}
+  BadCertificateException(RequestOptions r) : super(requestOptions: r);
+}
 
-// @override
-// String toString() {
-//   return 'Dịch vụ hiện đang bị gián đoạn';
-// }
+/// {@template interceptor}
+/// UnknownErrorException
+/// {@endtemplate}
+class UnknownErrorException extends DioException {
+  /// {@macro UnknownErrorException}
+  UnknownErrorException(RequestOptions r) : super(requestOptions: r);
 }
