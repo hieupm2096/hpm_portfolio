@@ -12,6 +12,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => ImageModel(
       url: json['url'] as String?,
       width: json['width'] as int?,
       height: json['height'] as int?,
+      blurhash: json['blurhash'] as String?,
     );
 
 Map<String, dynamic> _$ImageModelToJson(ImageModel instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$ImageModelToJson(ImageModel instance) =>
       'url': instance.url,
       'width': instance.width,
       'height': instance.height,
+      'blurhash': instance.blurhash,
     };

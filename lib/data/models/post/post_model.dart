@@ -3,7 +3,7 @@ import 'package:hpm_portfolio/data/models/author/author_model.dart';
 import 'package:hpm_portfolio/data/models/category/category_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'article_model.g.dart';
+part 'post_model.g.dart';
 
 /// id : 1
 /// title : "The internet's Own boy"
@@ -18,8 +18,8 @@ part 'article_model.g.dart';
 /// category : {"id":1,"name":"work"}
 
 @JsonSerializable()
-class ArticleModel {
-  ArticleModel({
+class PostModel {
+  const PostModel({
     this.id,
     this.title,
     this.description,
@@ -33,8 +33,8 @@ class ArticleModel {
     this.author,
   });
 
-  factory ArticleModel.fromJson(Map<String, dynamic> json) =>
-      _$ArticleModelFromJson(json);
+  factory PostModel.fromJson(Map<String, dynamic> json) =>
+      _$PostModelFromJson(json);
 
   final num? id;
   final String? title;

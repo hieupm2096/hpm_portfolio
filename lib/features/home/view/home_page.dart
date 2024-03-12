@@ -64,13 +64,13 @@ class _HomeSmall extends StatelessWidget {
                 TableCell(child: CategoryHeader(title: 'Work')),
               ],
             ),
-            TableRow(children: [TableCell(child: ProjectListBlocWrapper())]),
+            TableRow(children: [TableCell(child: WorkListWrapper())]),
             TableRow(
               children: [
                 TableCell(child: CategoryHeader(title: 'Good readings')),
               ],
             ),
-            TableRow(children: [TableCell(child: ArticleListWrapper())]),
+            TableRow(children: [TableCell(child: BlogListWrapper())]),
           ],
         ),
       ],
@@ -119,8 +119,8 @@ class _HomeMedium extends StatelessWidget {
             ),
             TableRow(
               children: [
-                TableCell(child: ProjectListBlocWrapper()),
-                TableCell(child: ArticleListWrapper()),
+                TableCell(child: WorkListWrapper()),
+                TableCell(child: BlogListWrapper()),
               ],
             ),
           ],
@@ -157,8 +157,8 @@ class _HomeLarge extends StatelessWidget {
             TableRow(
               children: [
                 TableCell(child: AboutWrapper()),
-                TableCell(child: ProjectListBlocWrapper()),
-                TableCell(child: ArticleListWrapper()),
+                TableCell(child: WorkListWrapper()),
+                TableCell(child: BlogListWrapper()),
               ],
             ),
           ],

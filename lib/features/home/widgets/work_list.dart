@@ -1,39 +1,42 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hpm_portfolio/data/models/article/article_model.dart';
-import 'package:hpm_portfolio/features/home/controllers/project/project_controller.dart';
+import 'package:hpm_portfolio/data/models/models.dart';
+import 'package:hpm_portfolio/features/home/controllers/work/work_controller.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 
-class ProjectList extends StatelessWidget {
-  const ProjectList({
+class WorkList extends StatelessWidget {
+  const WorkList({
     super.key,
-    this.projects,
+    this.works,
   });
 
-  final List<ArticleModel>? projects;
+  final List<PostModel>? works;
 
   @override
   Widget build(BuildContext context) {
-    final projectWidgets = <Project>[];
+    final workWidgets = <Work>[];
 
-    if (projects?.isNotEmpty ?? false) {
-      projectWidgets.addAll(
-        projects!.map(
+    if (works?.isNotEmpty ?? false) {
+      workWidgets.addAll(
+        works!.map(
           (e) {
             final coverUrl = e.cover?.url;
 
-            return Project(
+            return Work(
               title: e.title ?? '',
               label: e.note ?? '',
               content: e.description ?? '',
               thumbnail: coverUrl != null
                   ? CachedNetworkImage(
                       imageUrl: coverUrl,
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.error,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(
+                          Icons.error,
+                        ),
                       ),
                     )
                   : const SizedBox.shrink(),
@@ -42,9 +45,9 @@ class ProjectList extends StatelessWidget {
         ),
       );
     } else {
-      projectWidgets.addAll(
-        <Project>[
-          Project(
+      workWidgets.addAll(
+        <Work>[
+          Work(
             title: 'Digital Factory',
             label: 'Product Design',
             content: 'The Digital Factory is in charge of the digitalization of'
@@ -54,14 +57,14 @@ class ProjectList extends StatelessWidget {
             thumbnail: Assets.images.image1.image(),
             link: '',
           ),
-          Project(
+          Work(
             title: 'ligne roset',
             label: 'Redesign of the website',
             content: 'ligne roset is a French modern furniture company'
                 ' founded by  Antoine Roset in 1860.',
             thumbnail: Assets.images.image2.image(),
           ),
-          Project(
+          Work(
             title: 'maxfield',
             label: 'Redesign of the website',
             content: 'Los Angeles luxury boutique with curated designer'
@@ -73,11 +76,11 @@ class ProjectList extends StatelessWidget {
     }
 
     return ListView.separated(
-      itemCount: projectWidgets.length,
+      itemCount: workWidgets.length,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return Inset(child: projectWidgets[index]);
+        return Inset(child: workWidgets[index]);
       },
       separatorBuilder: (context, index) {
         return Assets.images.intersectLine.svg();
@@ -86,15 +89,15 @@ class ProjectList extends StatelessWidget {
   }
 }
 
-class ProjectListBlocWrapper extends ConsumerWidget {
-  const ProjectListBlocWrapper({super.key});
+class WorkListWrapper extends ConsumerWidget {
+  const WorkListWrapper({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncProjects = ref.watch(getProjectsProvider);
+    final asyncWorks = ref.watch(getWorksProvider);
 
-    return asyncProjects.when(
-      data: (data) => ProjectList(projects: data),
+    return asyncWorks.when(
+      data: (data) => WorkList(works: data),
       error: (error, stackTrace) => const SizedBox.shrink(),
       loading: ProjectListShimmer.new,
     );

@@ -1,32 +1,32 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hpm_portfolio/data/models/article/article_model.dart';
-import 'package:hpm_portfolio/features/home/controllers/article/article_controller.dart';
+import 'package:hpm_portfolio/data/models/models.dart';
+import 'package:hpm_portfolio/features/home/controllers/blog/blog_controller.dart';
 import 'package:hpm_portfolio/features/home/widgets/intersect_category.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 import 'package:jiffy/jiffy.dart';
 
-class ArticleList extends StatelessWidget {
-  const ArticleList({
+class BlogList extends StatelessWidget {
+  const BlogList({
     super.key,
-    this.articles,
+    this.blogs,
   });
 
-  final List<ArticleModel>? articles;
+  final List<PostModel>? blogs;
 
   @override
   Widget build(BuildContext context) {
-    final articleWidgets = <Article>[];
-    if (articles?.isNotEmpty ?? false) {
-      articleWidgets.addAll(
-        articles!.map(
+    final blogWidgets = <Blog>[];
+    if (blogs?.isNotEmpty ?? false) {
+      blogWidgets.addAll(
+        blogs!.map(
           (e) {
             final coverUrl = e.cover?.url;
 
-            return Article(
+            return Blog(
               title: e.title ?? '',
               label: e.author?.name ?? '',
               content: e.description ?? '',
@@ -44,9 +44,9 @@ class ArticleList extends StatelessWidget {
         ),
       );
     } else {
-      articleWidgets.addAll(
+      blogWidgets.addAll(
         [
-          Article(
+          Blog(
             title: 'Quantifying the value of UX',
             label: 'uxdesign.cc',
             publishedDate: Jiffy.parseFromList([2020, 04, 17]).dateTime,
@@ -56,7 +56,7 @@ class ArticleList extends StatelessWidget {
             thumbnail: Assets.images.articleImage1.image(),
             link: '',
           ),
-          Article(
+          Blog(
             title: 'Bite sized learning',
             label: 'booklet.io',
             publishedDate: Jiffy.parseFromList([2020, 02, 03]).dateTime,
@@ -64,7 +64,7 @@ class ArticleList extends StatelessWidget {
                 ' freelancing & more. Learn new skills & insights, fast.',
             thumbnail: Assets.images.articleImage2.image(),
           ),
-          Article(
+          Blog(
             title: 'This is the one skill designers need to develop most in'
                 ' 2020',
             label: 'Fast Company',
@@ -74,7 +74,7 @@ class ArticleList extends StatelessWidget {
                 ' willingness to collaborate.',
             thumbnail: Assets.images.articleImage3.image(),
           ),
-          Article(
+          Blog(
             title: 'A new way to rhythm your Design System with golden ratio'
                 ' + arithmetic',
             label: 'uxdesign.cc',
@@ -83,7 +83,7 @@ class ArticleList extends StatelessWidget {
                 ' similar to that of Fibonacci.',
             thumbnail: Assets.images.articleImage4.image(),
           ),
-          Article(
+          Blog(
             title: 'Hit the Mute Button: Why Everyone Is Trying to Silence the'
                 ' Outside World',
             label: 'Guardian',
@@ -93,7 +93,7 @@ class ArticleList extends StatelessWidget {
                 " evidence that cutting ourselves off like this isn't healthy.",
             thumbnail: Assets.images.articleImage5.image(),
           ),
-          Article(
+          Blog(
             title: 'How can brands battle the climate crisis?',
             label: 'designnote',
             publishedDate: Jiffy.parseFromList([2019, 06, 12]).dateTime,
@@ -108,8 +108,8 @@ class ArticleList extends StatelessWidget {
       );
     }
 
-    final maps = <String, List<Article>>{};
-    for (final e in articleWidgets) {
+    final maps = <String, List<Blog>>{};
+    for (final e in blogWidgets) {
       final publishedDate = e.publishedDate;
       if (publishedDate != null) {
         final month = Jiffy.parseFromDateTime(publishedDate).format(
@@ -150,17 +150,17 @@ class ArticleList extends StatelessWidget {
   }
 }
 
-class ArticleListWrapper extends ConsumerWidget {
-  const ArticleListWrapper({super.key});
+class BlogListWrapper extends ConsumerWidget {
+  const BlogListWrapper({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncArticles = ref.watch(getArticlesProvider);
+    final asyncBlogs = ref.watch(getBlogsProvider);
 
-    return asyncArticles.when(
-      data: (data) => ArticleList(articles: data),
+    return asyncBlogs.when(
+      data: (data) => BlogList(blogs: data),
       error: (error, stackTrace) => const SizedBox.shrink(),
-      loading: ArticleListShimmer.new,
+      loading: BlogListShimmer.new,
     );
   }
 }

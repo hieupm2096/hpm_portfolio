@@ -3,8 +3,8 @@ import 'package:hpm_portfolio/core/core.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 import 'package:jiffy/jiffy.dart';
 
-class ArticleNoPic extends StatelessWidget {
-  const ArticleNoPic({
+class PostNoPic extends StatelessWidget {
+  const PostNoPic({
     super.key,
     required this.title,
     required this.label,

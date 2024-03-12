@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'about_controller.dart';
+part of 'work_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getAboutHash() => r'ca20d4f9191fa5fe00d3bef330414d9057271e5a';
+String _$getWorksHash() => r'9d8ec2ed181dd12bb2ea9297fd6655b99b346551';
 
-/// See also [getAbout].
-@ProviderFor(getAbout)
-final getAboutProvider = FutureProvider<AboutModel>.internal(
-  getAbout,
-  name: r'getAboutProvider',
+/// See also [getWorks].
+@ProviderFor(getWorks)
+final getWorksProvider = FutureProvider<List<PostModel>>.internal(
+  getWorks,
+  name: r'getWorksProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getAboutHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getWorksHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef GetAboutRef = FutureProviderRef<AboutModel>;
+typedef GetWorksRef = FutureProviderRef<List<PostModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 
-class Project extends StatelessWidget {
-  const Project({
+class Work extends StatelessWidget {
+  const Work({
     super.key,
     required this.title,
     required this.label,
@@ -28,7 +28,7 @@ class Project extends StatelessWidget {
       children: [
         thumbnail ?? Assets.images.image1.image(fit: BoxFit.cover),
         const SizedBox(height: 16),
-        ArticleNoPic(
+        PostNoPic(
           title: title,
           content: content,
           label: label,

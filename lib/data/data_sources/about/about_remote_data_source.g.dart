@@ -20,10 +20,10 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
 
   @override
   Future<BaseResponse<AboutModel>> getAbout() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BaseResponse<AboutModel>>(Options(
       method: 'GET',
@@ -36,7 +36,11 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BaseResponse<AboutModel>.fromJson(
       _result.data!,
       (json) => AboutModel.fromJson(json as Map<String, dynamic>),
@@ -55,6 +59,23 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
 
@@ -76,4 +97,5 @@ final aboutRDSProvider = Provider<AboutRemoteDataSource>.internal(
 );
 
 typedef AboutRDSRef = ProviderRef<AboutRemoteDataSource>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

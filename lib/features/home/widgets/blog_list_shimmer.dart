@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/shared/insets/inset.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 
-class ArticleListShimmer extends StatelessWidget {
-  const ArticleListShimmer({super.key});
+class BlogListShimmer extends StatelessWidget {
+  const BlogListShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {

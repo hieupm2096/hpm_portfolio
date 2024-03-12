@@ -9,12 +9,13 @@ part 'image_model.g.dart';
 /// height : 707
 @JsonSerializable()
 class ImageModel {
-  ImageModel({
+  const ImageModel({
     this.id,
     this.name,
     this.url,
     this.width,
     this.height,
+    this.blurhash,
   });
 
   factory ImageModel.fromJson(Map<String, dynamic> json) =>
@@ -25,4 +26,5 @@ class ImageModel {
   final String? url;
   final int? width;
   final int? height;
+  final String? blurhash;
 }

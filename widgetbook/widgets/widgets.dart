@@ -10,7 +10,7 @@ class WidgetbookWidgets {
         WidgetbookUseCase(
           name: 'Article No Pic',
           builder: (context) {
-            return ArticleNoPic(
+            return PostNoPic(
               title: context.knobs.text(
                 label: 'title',
                 initialValue: 'What makes a great design outcome?',
@@ -71,9 +71,9 @@ class WidgetbookWidgets {
           },
         ),
         WidgetbookUseCase(
-          name: 'Project',
+          name: 'Work',
           builder: (context) {
-            return Project(
+            return Work(
               title: context.knobs.text(
                 label: 'title',
                 initialValue: 'Digital Factory by VeePee',
@@ -97,14 +97,14 @@ class WidgetbookWidgets {
           builder: (context) {
             return const SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: ProjectList(),
+              child: WorkList(),
             );
           },
         ),
         WidgetbookUseCase(
-          name: 'Article',
+          name: 'Blog',
           builder: (context) {
-            return Article(
+            return Blog(
               title: context.knobs.text(
                 label: 'title',
                 initialValue: 'What makes a great design outcome?',
@@ -131,7 +131,7 @@ class WidgetbookWidgets {
           builder: (context) {
             return const SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: ArticleList(),
+              child: BlogList(),
             );
           },
         ),

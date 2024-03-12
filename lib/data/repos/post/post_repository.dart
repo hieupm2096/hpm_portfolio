@@ -1,32 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hpm_portfolio/core/exceptions/exceptions.dart';
 import 'package:hpm_portfolio/core/models/models.dart';
-import 'package:hpm_portfolio/data/data_sources/article/article_remote_data_source.dart';
+import 'package:hpm_portfolio/data/data_sources/data_sources.dart';
 import 'package:hpm_portfolio/data/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'article_repository.g.dart';
+part 'post_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-IArticleRepository articleRepository(ArticleRepositoryRef ref) {
-  return ArticleRepository(ref);
+PostRepository postRepository(PostRepositoryRef ref) {
+  return PostRepository(ref);
 }
 
-abstract class IArticleRepository {
-  Future<Result<List<ArticleModel>, Exception>> getWorks();
-
-  Future<Result<List<ArticleModel>, Exception>> getArticles();
-}
-
-class ArticleRepository implements IArticleRepository {
-  ArticleRepository(this.ref);
+class PostRepository {
+  PostRepository(this.ref);
 
   final Ref ref;
 
-  @override
-  Future<Result<List<ArticleModel>, Exception>> getArticles() async {
+  Future<Result<List<PostModel>, Exception>> getBlogs() async {
     try {
-      final response = await ref.read(articleRDSProvider).getArticles(
+      final response = await ref.read(postRDSProvider).getPosts(
             category: 'blog',
           );
       final data = response.data;
@@ -39,10 +32,9 @@ class ArticleRepository implements IArticleRepository {
     }
   }
 
-  @override
-  Future<Result<List<ArticleModel>, Exception>> getWorks() async {
+  Future<Result<List<PostModel>, Exception>> getWorks() async {
     try {
-      final response = await ref.read(articleRDSProvider).getArticles(
+      final response = await ref.read(postRDSProvider).getPosts(
             category: 'work',
           );
       final data = response.data;

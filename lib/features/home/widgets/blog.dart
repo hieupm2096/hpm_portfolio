@@ -3,8 +3,8 @@ import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
 import 'package:hpm_portfolio/shared/shared.dart';
 
-class Article extends StatelessWidget {
-  const Article({
+class Blog extends StatelessWidget {
+  const Blog({
     super.key,
     required this.title,
     required this.label,
@@ -43,7 +43,7 @@ class Article extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: ArticleNoPic(
+          child: PostNoPic(
             title: title,
             label: label,
             content: content,
