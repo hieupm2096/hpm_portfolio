@@ -12,6 +12,7 @@ dependencies:
   dio: ^5.4.1
   flutter:
     sdk: flutter
+  flutter_blurhash: ^0.8.2
   flutter_localizations:
     sdk: flutter
   flutter_loggy: ^2.0.2

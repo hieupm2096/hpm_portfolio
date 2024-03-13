@@ -8,9 +8,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'post_remote_data_source.g.dart';
 
 @Riverpod(keepAlive: true)
-PostRemoteDataSource postRDS(PostRDSRef ref) {
-  return PostRemoteDataSource(ref.read(dioProvider), baseUrl: Env.host);
-}
+PostRemoteDataSource postRDS(PostRDSRef ref) =>
+    PostRemoteDataSource(ref.read(dioProvider), baseUrl: Env.host);
 
 @RestApi()
 abstract class PostRemoteDataSource {
@@ -22,7 +21,7 @@ abstract class PostRemoteDataSource {
     @Query('populate[cover][fields]') String coverFields = 'name,url',
     @Query('populate[category][fields]') String categoryFields = 'name',
     @Query(r'filters[category][name][$eq]') String? category,
-    @Query('sort') String? sort = 'publishedAt:desc',
+    @Query('sort') String? sort = 'priority:asc',
     @Query('pagination[page]') int page = 1,
     @Query('pagination[pageSize]') int pageSize = 100,
   });

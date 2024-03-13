@@ -23,7 +23,7 @@ class _PostRemoteDataSource implements PostRemoteDataSource {
     String coverFields = 'name,url',
     String categoryFields = 'name',
     String? category,
-    String? sort = 'publishedAt:desc',
+    String? sort = 'priority:asc',
     int page = 1,
     int pageSize = 100,
   }) async {

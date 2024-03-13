@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hpm_portfolio/data/models/models.dart';
 import 'package:hpm_portfolio/features/home/controllers/work/work_controller.dart';
@@ -24,18 +25,33 @@ class WorkList extends StatelessWidget {
         works!.map(
           (e) {
             final coverUrl = e.cover?.url;
+            final blurhash = e.cover?.blurhash;
 
             return Work(
               title: e.title ?? '',
               label: e.note ?? '',
               content: e.description ?? '',
               thumbnail: coverUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: coverUrl,
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) => const Center(
-                        child: Icon(
-                          Icons.error,
+                  ? Center(
+                      child: CachedNetworkImage(
+                        imageUrl: coverUrl,
+                        fit: BoxFit.contain,
+                        height: 300,
+                        fadeInDuration: const Duration(seconds: 1),
+                        placeholder: (context, url) {
+                          if (blurhash != null) {
+                            return SizedBox(
+                              height: 300,
+                              child: BlurHash(hash: blurhash),
+                            );
+                          }
+
+                          return const SizedBox.shrink();
+                        },
+                        errorWidget: (context, url, error) => const Center(
+                          child: Icon(
+                            Icons.error,
+                          ),
                         ),
                       ),
                     )
