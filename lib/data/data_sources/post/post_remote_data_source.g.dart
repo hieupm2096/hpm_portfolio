@@ -103,7 +103,7 @@ class _PostRemoteDataSource implements PostRemoteDataSource {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postRDSHash() => r'fefd658466f10a0c90056c76269054383b4a5287';
+String _$postRDSHash() => r'd23d22b962edeea6213c35dbcaf37bfbcda76f06';
 
 /// See also [postRDS].
 @ProviderFor(postRDS)

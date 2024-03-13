@@ -83,7 +83,7 @@ class _AboutRemoteDataSource implements AboutRemoteDataSource {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$aboutRDSHash() => r'4855b03b3d067911515220ff5ff43ec89d7042d1';
+String _$aboutRDSHash() => r'06d03dc513e3137dee3f4fd66d22a71dacf7c375';
 
 /// See also [aboutRDS].
 @ProviderFor(aboutRDS)

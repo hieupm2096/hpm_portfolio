@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hpm_portfolio/core/core.dart';
 import 'package:hpm_portfolio/data/models/models.dart';
-import 'package:hpm_portfolio/gen/env.dart';
 import 'package:retrofit/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,7 +8,7 @@ part 'post_remote_data_source.g.dart';
 
 @Riverpod(keepAlive: true)
 PostRemoteDataSource postRDS(PostRDSRef ref) =>
-    PostRemoteDataSource(ref.read(dioProvider), baseUrl: Env.host);
+    PostRemoteDataSource(ref.read(dioProvider));
 
 @RestApi()
 abstract class PostRemoteDataSource {
