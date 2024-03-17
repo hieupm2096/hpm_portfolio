@@ -32,6 +32,7 @@ I am currently learning p5.js for the purpose of making generative art.
     return Inset(
       child: MarkdownBody(
         data: content,
+        softLineBreak: true,
         styleSheet: MarkdownStyleSheet.fromTheme(context.theme).copyWith(
           p: context.textTheme.bodyLarge,
         ),
