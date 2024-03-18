@@ -21,6 +21,7 @@ class PostRepository {
     try {
       final response = await ref.read(postRDSProvider).getPosts(
             category: 'blog',
+            sort: 'publishedAt:desc',
           );
       final data = response.data;
       if (data == null) {
