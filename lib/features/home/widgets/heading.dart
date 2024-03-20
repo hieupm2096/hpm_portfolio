@@ -51,21 +51,21 @@ class Heading extends StatelessWidget {
             children: [
               _HeadingLink(
                 url: linkedInUrl,
-                icon: Assets.icons.icLinkedin.svg(),
+                icon: Assets.icons.icLinkedin,
               ),
               const SizedBox(width: 16),
               Assets.icons.icSlash.svg(height: 32),
               const SizedBox(width: 16),
               _HeadingLink(
                 url: githubUrl,
-                icon: Assets.icons.icGithub.svg(),
+                icon: Assets.icons.icGithub,
               ),
               const SizedBox(width: 16),
               Assets.icons.icSlash.svg(height: 32),
               const SizedBox(width: 16),
               _HeadingLink(
                 email: emailUrl,
-                icon: Assets.icons.icMail.svg(),
+                icon: Assets.icons.icMail,
               ),
             ],
           ),
@@ -88,7 +88,7 @@ class _HeadingLink extends StatelessWidget {
 
   final String? url;
   final String? email;
-  final Widget icon;
+  final SvgGenImage icon;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,6 @@ class _HeadingLink extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Tapable(
-        cursor: SystemMouseCursors.click,
         onTap: () async {
           if (url != null) {
             final uri = Uri.parse(url!);
@@ -115,11 +114,26 @@ class _HeadingLink extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            icon,
+            Builder(
+              builder: (context) {
+                return icon.svg(
+                  colorFilter: ColorFilter.mode(
+                    DefaultTextStyle.of(context).style.color!,
+                    BlendMode.srcIn,
+                  ),
+                );
+              },
+            ),
             const SizedBox(width: 8),
-            Text(
-              label ?? '',
-              style: context.textTheme.titleLarge,
+            Builder(
+              builder: (context) {
+                return Text(
+                  label ?? '',
+                  style: context.textTheme.titleLarge!.copyWith(
+                    color: DefaultTextStyle.of(context).style.color,
+                  ),
+                );
+              },
             ),
           ],
         ),

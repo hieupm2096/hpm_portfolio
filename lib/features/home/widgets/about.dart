@@ -35,6 +35,9 @@ I am currently learning p5.js for the purpose of making generative art.
         softLineBreak: true,
         styleSheet: MarkdownStyleSheet.fromTheme(context.theme).copyWith(
           p: context.textTheme.bodyLarge,
+          a: context.textTheme.bodyLarge!.copyWith(
+            color: AppColors.secondary,
+          ),
         ),
       ),
     );
