@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hpm_portfolio/data/models/models.dart';
 import 'package:hpm_portfolio/features/home/controllers/blog/blog_controller.dart';
@@ -24,8 +25,7 @@ class BlogList extends StatelessWidget {
       blogWidgets.addAll(
         blogs!.map(
           (e) {
-            // TODO(hieupm): uncomment it later
-            // final blurhash = e.cover?.blurhash;
+            final blurhash = e.cover?.blurhash;
             final coverUrl = e.cover?.url;
 
             return Blog(
@@ -36,14 +36,17 @@ class BlogList extends StatelessWidget {
               thumbnail: coverUrl != null
                   ? CachedNetworkImage(
                       imageUrl: coverUrl,
-                      // TODO(hieupm): uncomment it later
-                      // placeholder: (context, url) {
-                      //   if (blurhash != null) {
-                      //     return BlurHash(hash: blurhash);
-                      //   }
-                      //
-                      //   return const SizedBox.shrink();
-                      // },
+                      fadeInDuration: const Duration(seconds: 1),
+                      placeholder: (context, url) {
+                        if (blurhash != null) {
+                          return SizedBox(
+                            height: 100,
+                            child: BlurHash(hash: blurhash),
+                          );
+                        }
+
+                        return const SizedBox.shrink();
+                      },
                       errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                       ),

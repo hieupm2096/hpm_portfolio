@@ -17,8 +17,8 @@ abstract class PostRemoteDataSource {
 
   @GET('/api/posts')
   Future<BaseResponse<List<PostModel>>> getPosts({
-    @Query('populate[cover][fields]') String coverFields = 'name,url',
-    @Query('populate[category][fields]') String categoryFields = 'name',
+    @Query('populate[cover]') bool? cover = true,
+    @Query('populate[category]') bool? cat = true,
     @Query(r'filters[category][name][$eq]') String? category,
     @Query('sort') String? sort = 'priority:asc',
     @Query('pagination[page]') int page = 1,

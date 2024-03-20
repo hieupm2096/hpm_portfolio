@@ -7,7 +7,7 @@ part 'category_model.g.dart';
 
 @JsonSerializable()
 class CategoryModel {
-  CategoryModel({
+  const CategoryModel({
     this.id,
     this.name,
   });

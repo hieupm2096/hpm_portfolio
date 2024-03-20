@@ -20,8 +20,8 @@ class _PostRemoteDataSource implements PostRemoteDataSource {
 
   @override
   Future<BaseResponse<List<PostModel>>> getPosts({
-    String coverFields = 'name,url',
-    String categoryFields = 'name',
+    bool? cover = true,
+    bool? cat = true,
     String? category,
     String? sort = 'priority:asc',
     int page = 1,
@@ -29,8 +29,8 @@ class _PostRemoteDataSource implements PostRemoteDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'populate[cover][fields]': coverFields,
-      r'populate[category][fields]': categoryFields,
+      r'populate[cover]': cover,
+      r'populate[category]': cat,
       r'filters[category][name][$eq]': category,
       r'sort': sort,
       r'pagination[page]': page,
