@@ -4,12 +4,9 @@ import 'package:hpm_portfolio/shared/shared.dart';
 class Tapable extends StatefulWidget {
   const Tapable({
     super.key,
-    this.cursor = SystemMouseCursors.click,
     this.onTap,
     required this.child,
   });
-
-  final MouseCursor cursor;
 
   final VoidCallback? onTap;
 
@@ -25,9 +22,16 @@ class _TapableState extends State<Tapable> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      cursor: widget.cursor,
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      cursor:
+          widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
+      onEnter: widget.onTap != null
+          ? (_) {
+              setState(() => _isHovered = true);
+            }
+          : null,
+      onExit: widget.onTap != null
+          ? (_) => setState(() => _isHovered = false)
+          : null,
       child: GestureDetector(
         onTap: widget.onTap,
         child: DefaultTextStyle(

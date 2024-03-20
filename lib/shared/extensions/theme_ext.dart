@@ -6,4 +6,7 @@ extension ThemeExt on BuildContext {
 
   /// Return text theme
   TextTheme get textTheme => theme.textTheme;
+
+  /// Return default style
+  TextStyle get defaultTextStyle => DefaultTextStyle.of(this).style;
 }

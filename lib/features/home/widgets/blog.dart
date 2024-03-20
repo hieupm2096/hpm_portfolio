@@ -47,6 +47,7 @@ class Blog extends StatelessWidget {
             title: title,
             label: label,
             content: content,
+            publishedDate: publishedDate,
           ),
         ),
       ],

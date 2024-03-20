@@ -10,14 +10,14 @@ class PostNoPic extends StatelessWidget {
     required this.label,
     this.publishedDate,
     required this.content,
-    this.link,
+    this.onTap,
   });
 
   final String title;
   final String label;
   final DateTime? publishedDate;
   final String content;
-  final String? link;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,18 @@ class PostNoPic extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          title,
-          style: context.textTheme.titleLarge,
+        Tapable(
+          onTap: onTap,
+          child: Builder(
+            builder: (context) {
+              return Text(
+                title,
+                style: context.textTheme.titleLarge!.copyWith(
+                  color: context.defaultTextStyle.color,
+                ),
+              );
+            },
+          ),
         ),
         const SizedBox(height: 4),
         Text(
@@ -46,7 +55,7 @@ class PostNoPic extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 12),
-        if (link != null)
+        if (onTap != null)
           Text(
             'Read more →',
             style: context.textTheme.labelMedium,

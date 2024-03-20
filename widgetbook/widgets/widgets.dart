@@ -25,10 +25,7 @@ class WidgetbookWidgets {
                     'efforts and the efforts of our teams to result in '
                     'something truly great…',
               ),
-              link: context.knobs.text(
-                label: 'link',
-                initialValue: 'abc',
-              ),
+              onTap: () {},
             );
           },
         ),

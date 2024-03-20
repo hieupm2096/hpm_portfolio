@@ -28,6 +28,7 @@ class WorkList extends StatelessWidget {
             final blurhash = e.cover?.blurhash;
 
             return Work(
+              // onTap: () {},
               title: e.title ?? '',
               label: e.note ?? '',
               content: e.description ?? '',
@@ -71,7 +72,6 @@ class WorkList extends StatelessWidget {
                 ' data writing, media management and staffing solutions for our'
                 ' collaborators.',
             thumbnail: Assets.images.image1.image(),
-            link: '',
           ),
           Work(
             title: 'ligne roset',

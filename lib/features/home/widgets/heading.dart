@@ -118,7 +118,7 @@ class _HeadingLink extends StatelessWidget {
               builder: (context) {
                 return icon.svg(
                   colorFilter: ColorFilter.mode(
-                    DefaultTextStyle.of(context).style.color!,
+                    context.defaultTextStyle.color!,
                     BlendMode.srcIn,
                   ),
                 );
@@ -130,7 +130,7 @@ class _HeadingLink extends StatelessWidget {
                 return Text(
                   label ?? '',
                   style: context.textTheme.titleLarge!.copyWith(
-                    color: DefaultTextStyle.of(context).style.color,
+                    color: context.defaultTextStyle.color,
                   ),
                 );
               },

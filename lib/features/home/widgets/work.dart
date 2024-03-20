@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hpm_portfolio/features/home/widgets/widgets.dart';
 import 'package:hpm_portfolio/gen/assets.gen.dart';
+import 'package:hpm_portfolio/shared/shared.dart';
 
 class Work extends StatelessWidget {
   const Work({
@@ -9,16 +10,16 @@ class Work extends StatelessWidget {
     required this.label,
     this.publishedDate,
     required this.content,
-    this.link,
     this.thumbnail,
+    this.onTap,
   });
 
   final String title;
   final String label;
   final DateTime? publishedDate;
   final String content;
-  final String? link;
   final Widget? thumbnail;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,16 @@ class Work extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        thumbnail ?? Assets.images.image1.image(fit: BoxFit.cover),
+        Tapable(
+          onTap: onTap,
+          child: thumbnail ?? Assets.images.image1.image(fit: BoxFit.cover),
+        ),
         const SizedBox(height: 16),
         PostNoPic(
+          onTap: onTap,
           title: title,
           content: content,
           label: label,
-          link: link,
           publishedDate: publishedDate,
         ),
       ],
